@@ -1,0 +1,51 @@
+.header{
+    background-color: #1E3A8A;
+    width:100%;
+    height:13vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.header img[alt="icone"]{
+    margin-right: 30px;
+    width: 2.083vw;
+}
+
+
+.header h1{
+    color: white;
+    font-size:2.083vw;
+    font-family: "Poppins", serif;
+    font-style: normal;
+    font-weight: 700;
+    margin: 0;
+}
+
+
+.header h3{
+    color: white;
+    font-size:1.042vw;
+    font-family: "Poppins", serif;
+    font-style: normal;
+    font-weight: 400;
+    margin:0px;
+    margin-left:10px;
+    display: flex;
+}
+
+.titulo{
+    display: flex;
+    gap: 5px;
+    margin-left: 10px;
+}
+
+.container{
+    background-color: #EFF6FF ;
+    width:100%; 
+    height: calc(100vh - 123px) !important;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
