@@ -7,7 +7,7 @@ html,body{
 .header{
     background-color: #1E3A8A;
     width:100%;
-    height:123px;
+    height:13vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,19 +16,31 @@ html,body{
 
 .header img[alt="icone"]{
     margin-right: 30px;
-    height: 40px;
-    width: 40px;
+    width: 2.083vw;
 }
 
-.branco{
-    background-color: white;
-    width:1200px;
-    height: 553px;
+
+.header h1{
+    color: white;
+    font-size:2.083vw;
+    font-family: "Poppins", serif;
+    font-style: normal;
+    font-weight: 700;
+    margin: 0;
+}
+
+
+.header h3{
+    color: white;
+    font-size:1.042vw;
+    font-family: "Poppins", serif;
+    font-style: normal;
+    font-weight: 400;
+    margin:0px;
+    margin-left:10px;
     display: flex;
-    justify-content: center;
-    align-items:center
-
 }
+
 
 .container{
     background-color: #EFF6FF ;
@@ -39,39 +51,35 @@ html,body{
     align-items:center;
 }
 
+
+.branco{
+    background-color: white;
+    width:62.5vw;
+    height:58.5vh;
+    display: flex;
+    justify-content: center;
+    align-items:center
+
+}
+
+
 .imagem{
     background-color: white;
-    width:484px;
-    height: 350px;
+    width:25.208vw;
+    height: 38.889vh;
     margin-right: 40px;
-    background-image: url('foto.png');
+    background: url('foto.png') no-repeat center center;
+    background-size: cover;
 }
+
 
 .conteudo{
     background-color:white;
-    width: 502px;
-    height: 425px;
+    width: 26.146vw;
+    height: 47.222vh;
 }
 
-.header h1{
-    color: white;
-    font-size:40px;
-    font-family: "Poppins", serif;
-    font-style: normal;
-    font-weight: 700;
-    margin: 0;
-}
 
-.header h3{
-    color: white;
-    font-size:20px;
-    font-family: "Poppins", serif;
-    font-style: normal;
-    font-weight: 400;
-    margin:0px;
-    margin-left:10px;
-    display: flex;
-}
 
 .titulo{
     display: flex;
@@ -81,7 +89,7 @@ html,body{
 
 .conteudo h1{
     color: #1E1E1E;
-    font-size:24px;
+    font-size:1.25vw;
     font-family: "Poppins", serif;
     font-style: normal;
     font-weight: 600;
@@ -90,7 +98,7 @@ html,body{
 
 .conteudo h2{
     color: #757575;
-    font-size:20px;
+    font-size:1.042vw;
     font-family: "Poppins", serif;
     font-style: normal;
     font-weight: 400;
@@ -101,14 +109,14 @@ html,body{
 
 .conteudo{
     color: #1E1E1E;
-    font-size:15px;
+    font-size:0.781vw;
     font-family: "Poppins", serif;
     font-style: normal;
     font-weight: 400;
 }
 
 .botoes button{
-    font-size: 14px;
+    font-size: 0.729vw;
     background-color: #3B82F6;
     color:white;
     height: 250px;
