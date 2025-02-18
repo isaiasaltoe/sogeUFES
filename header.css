@@ -1,3 +1,8 @@
+html,body{
+    margin: 0;
+    padding: 0;
+}
+
 .header{
     background-color: #1E3A8A;
     width:100%;
@@ -14,8 +19,8 @@
 }
 
 
-.header h1{
-    color: white;
+.titulo h1{
+    color:white;
     font-size:2.083vw;
     font-family: "Poppins", serif;
     font-style: normal;
@@ -39,6 +44,7 @@
     display: flex;
     gap: 5px;
     margin-left: 10px;
+    
 }
 
 .container{
@@ -48,4 +54,23 @@
     display: flex;
     justify-content: center;
     align-items:center;
+}
+
+.barra_lado{
+    background-color: #1E3A8A;
+    width:17vw;
+    height:100vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.barra_lado h3{
+    color: white;
+    font-size:1.042vw;
+    font-family: "Poppins", serif;
+    font-style: normal;
+    font-weight: 400;
+    margin:0px;
+    margin-left:10px;
+    display: flex;
 }
