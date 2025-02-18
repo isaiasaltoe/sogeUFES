@@ -73,26 +73,45 @@ html,body{
     margin: 0;
 }
 
-.salas{
+.salas {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-  grid-gap:10px 
-} 
-
-.salas div{
-    width:95%;
-    height:23.63vh;
-
-    padding: 0.5vh;
-    border-style:solid;
-    border-radius:20px ;
-    border-color: rgba(15, 14, 14, 0.178);
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 50px; 
+    padding: 20px; 
+    width: 100%;
+    box-sizing: border-box; 
 }
 
-.sala{
-    align-content: center;
+
+
+.salas div {
+    width: 100%; 
+    height: 14vh; 
+    padding: 10px;
+    border: solid 1px rgba(15, 14, 14, 0.178);
+    border-radius: 10px;
+    background-color: white; 
+    margin: 5px;
+    margin-left:-20px;
+}
+
+.sala {
+    height: 95px; /* Ajuste conforme necessário */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinha o conteúdo mais para cima */
+    align-items: flex-start;
 }
 
 .sala h3{
-    margin-bottom: 5vh;
+    margin-bottom: 2vh;
+}
+
+.sala p:first-of-type {
+    margin-top: 0; /* Garante que o primeiro <p> não tenha o margin-top negativo */
+}
+
+.sala p{
+    margin-top: -10px; /* Ajusta o texto para cima */
 }
