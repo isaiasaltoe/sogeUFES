@@ -33,7 +33,7 @@ body{
     width: 100%;
     justify-content:center;
     margin-bottom:  4.248704663212435vh;
-    
+
 }
 
 .texto h2{
@@ -74,7 +74,7 @@ body{
     font-weight: 700;
     margin: 0;
     margin-top: 13.8860103626943vh;
-    
+
 }
 
 .formulario p{
@@ -105,7 +105,7 @@ body{
     height: 7.357512953367876vh;
     width: 35.208333333333336vw;
     margin-bottom: 4.248704663212435vh;
-    
+
 }
 
 .subtexto p{
@@ -114,7 +114,7 @@ body{
     font-family: "Poppins", serif;
     font-weight: 700;
     font-size: 2.4870466321243523vh;
-    
+
 }
 
 .cadeado input:not(:placeholder-shown)  {
