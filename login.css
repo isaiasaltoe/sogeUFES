@@ -1,0 +1,126 @@
+body{
+    display:flex;
+}
+
+.container_login{
+
+    display: flex;
+    flex-direction: column;
+    background-color: #EFF6FF;
+    width: 100%;
+    align-items: center;
+    top: 0%;
+    height: 100%;  
+}
+
+.formulario centro{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    height: 100%;
+}
+
+
+.texto p{
+    display: flex;
+    color:black;
+    font-size: 1.6666666666666667vw;
+    font-family: "Poppins", serif;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0;
+    width: 100%;
+    justify-content:center;
+    margin-bottom:  4.248704663212435vh;
+
+}
+
+.texto h2{
+    color:black;
+    font-size:3.333vw;
+    font-family: "Poppins", serif;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0;
+    margin-top: 15.544041450777202vh;
+    display: flex; 
+    justify-content: center;
+
+}
+
+.conteudo{
+    height: 100%;
+    justify-content: center;
+}
+
+.formulario{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formulario button{
+    font-size: 3.1088082901554404vh;
+    background-color: #3B82F6;
+    color:white;
+    height:  6.632124352331606vh;
+    width: 32.020725388601036vh;
+    border-radius: 30px;
+    border: none;
+    font-family: "Poppins", serif;
+    font-weight: 700;
+    margin: 0;
+    margin-top: 13.8860103626943vh;
+
+}
+
+.formulario p{
+    margin: 0;
+}
+
+.formulario input{
+    background-color: white;
+    border:none;   
+    font-size:2.1354166666666665vw;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+}
+
+.livrofechado input{
+    background-image: url(photos/Book.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    height: 7.357512953367876vh;
+    width: 35.208333333333336vw;
+    margin-bottom: 4.248704663212435vh;
+}
+
+.cadeado input{
+    background-image: url(photos/Lock.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    height: 7.357512953367876vh;
+    width: 35.208333333333336vw;
+    margin-bottom: 4.248704663212435vh;
+
+}
+
+.subtexto p{
+    margin-top: 1.3471502590673574vh;
+    color:#3B82F6;
+    font-family: "Poppins", serif;
+    font-weight: 700;
+    font-size: 2.4870466321243523vh;
+
+}
+
+.cadeado input:not(:placeholder-shown)  {
+    background-image: none;
+}
+
+.livrofechado input:not(:placeholder-shown)  {
+    background-image: none;
+}
