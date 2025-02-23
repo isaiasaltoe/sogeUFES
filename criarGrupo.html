@@ -35,21 +35,21 @@
             <div class="texto">
                 <h2>Criar grupo</h2>   
             </div>
-            <form action="cad.php" method="post" class="formulario">
+            <form action="criarGrupo.php" method="post" class="formulario">
                 <div class="livroaberto">
-                    <input type="text" id="idDisciplina" name="disciplina" placeholder="Disciplina">
+                    <input type="text" id="idDisciplina" name="disciplina" placeholder="Disciplina"  required>
                 </div>
                 <div class="relogio">
-                    <input type="time" id="idHorario" name="horario" placeholder="Horário">
+                    <input type="time" id="idHorario" name="horario" placeholder="Horário" required>
                 </div>
                 <div class="local">
-                    <input type="text" id="Local" name="local" placeholder="local">
+                    <input type="text" id="Local" name="local" placeholder="local" required >
                 </div>
                 <div class="data">
-                    <input type="date" id="Data" name="data" placeholder="Data">
+                    <input type="date" id="Data" name="data" placeholder="Data" required>
                 </div>
                 <div class="descricao">
-                    <input type="text" id="Descricao" name="descricao" placeholder="Descrição">
+                    <input type="text" id="Descricao" name="descricao" placeholder="Descrição" required>
                 </div>
 
                 <button type="submit">
