@@ -4,9 +4,9 @@
     //usuario
     //senha
     $endereco = 'localhost';
-    $banco = 'SOGE';
-    $usuario = 'postegres';
-    $senha = 'adler';
+    $banco = 'trabalho';
+    $usuario = 'postgres';
+    $senha = ' ';
 
     try{
      //sgbd:host;port;DBname
