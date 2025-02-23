@@ -5,7 +5,7 @@
     //senha
     $endereco = 'localhost';
     $banco = 'SOGE';
-    $usuario = 'postegres';
+    $usuario = 'postgres';
     $senha = 'adler';
 
     try{
