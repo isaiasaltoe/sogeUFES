@@ -1,92 +1,61 @@
-<?php 
+<?php
+session_start();
 require_once 'conectaBD.php';
 
-session_start();
-
-if(!isset($_SESSION['matricula'])){
-    header('Location: login.html');
-    exit();
-}
-
-$codMatricula = $_SESSION['matricula'];
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-    try{
-        // Captura de dados do formulário
-        $disciplinaNome = trim($_POST['disciplina']);
-        $horario = trim($_POST['horario']);
-        $local = trim($_POST['local']);
-        $data = trim($_POST['data']);
-        $descricao = trim($_POST['descricao']);
-        $qtdVagas = 5; 
-        
-        // Buscar o ID da disciplina a partir do nome
-        $sqlDisciplina = "SELECT idDisciplina FROM disciplina WHERE nomeDisciplina = :disciplinaNome";
-        $stmtDisciplina = $pdo->prepare($sqlDisciplina);
-        $stmtDisciplina->bindParam(':disciplinaNome', $disciplinaNome);
-        $stmtDisciplina->execute();
-        $disciplina = $stmtDisciplina->fetch(PDO::FETCH_ASSOC);
-
-        if ($disciplina) {
-            $idDisciplina = $disciplina['idDisciplina'];
-        } else {
-            echo "Disciplina não encontrada.";
-            exit();
-        }
-
-        // Buscar o ID do horário
-        $sqlHorario = "SELECT idHorario FROM horario WHERE dataHorario = :data";
-        $stmtHorario = $pdo->prepare($sqlHorario);
-        $stmtHorario->bindParam(':data', $data);
-        $stmtHorario->execute();
-        $horario = $stmtHorario->fetch(PDO::FETCH_ASSOC);
-
-        if ($horario) {
-            $idHorario = $horario['idHorario'];
-        } else {
-            echo "Horário não encontrado.";
-            exit();
-        }
-
-        // Buscar o ID do local
-        $sqlLocal = "SELECT idLugar FROM lugar WHERE nomeLugar = :local";
-        $stmtLocal = $pdo->prepare($sqlLocal);
-        $stmtLocal->bindParam(':local', $local);
-        $stmtLocal->execute();
-        $lugar = $stmtLocal->fetch(PDO::FETCH_ASSOC);
-
-        if ($lugar) {
-            $idLugar = $lugar['idLugar'];
-        } else {
-            echo "Local não encontrado.";
-            exit();
-        }
-
-        // Inserir o grupo de estudo com os IDs encontrados
-        $sql = "INSERT INTO grupoEstudo (idDisciplina, idHorario, idLugar, descricao, qtdvagas, codMatricula)
-                VALUES (:idDisciplina, :idHorario, :idLugar, :descricao, :qtdvagas, :matricula)";
-
-        // Preparar o statement
-        $stmt = $pdo->prepare($sql);
-
-        // Bind dos parâmetros
-        $stmt->bindParam(':idDisciplina', $idDisciplina);
-        $stmt->bindParam(':idHorario', $idHorario);
-        $stmt->bindParam(':idLugar', $idLugar);
-        $stmt->bindParam(':descricao', $descricao);
-        $stmt->bindParam(':qtdvagas', $qtdVagas);
-        $stmt->bindParam(':matricula', $codMatricula);
-
-        // Executar a query
-        if ($stmt->execute()) {
-            echo "Grupo criado com sucesso!";
-        } else {
-            echo "Erro ao criar o grupo.";
-        }
-        
-    } catch(PDOException $e) {
-        echo "Erro ao realizar operação: " . $e->getMessage();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (!isset($_SESSION['codMatricula'])) {
+        echo "Erro: Usuário não autenticado.";
+        exit();
     }
+
+    $disciplina = $_POST['disciplina'];
+    $horario = $_POST['horario'];
+    $local = $_POST['local'];
+    $data = $_POST['data'];
+    $descricao = $_POST['descricao'];
+    $codMatricula = $_SESSION['codMatricula'];
+
+    if (!isset($pdo)) {
+        echo "Erro: Falha na conexão com o banco de dados.";
+        exit();
+    }
+
+    try {
+        $pdo->beginTransaction();
+
+        $sqlGrupo = "INSERT INTO grupoEstudo (idHorario, idDisciplina, idLugar, descricao, qtdvagas, codMatricula)
+                     VALUES (:horario, :disciplina, :local, :descricao, 5, :codMatricula) RETURNING idGrupoEstudo";
+
+        $stmtGrupo = $pdo->prepare($sqlGrupo);
+        $stmtGrupo->execute([
+            ':horario' => $horario,
+            ':disciplina' => $disciplina,
+            ':local' => $local,
+            ':descricao' => $descricao,
+            ':codMatricula' => $codMatricula
+        ]);
+
+        $idGrupoEstudo = $stmtGrupo->fetchColumn();
+
+        $sqlParticipacao = "INSERT INTO participacao (dataEntrada, status, codMatricula, idGrupoEstudo)
+                            VALUES (:dataEntrada, 'Criador', :codMatricula, :idGrupoEstudo)";
+
+        $stmtParticipacao = $pdo->prepare($sqlParticipacao);
+        $stmtParticipacao->execute([
+            ':dataEntrada' => $data,
+            ':codMatricula' => $codMatricula,
+            ':idGrupoEstudo' => $idGrupoEstudo
+        ]);
+
+        $pdo->commit();
+
+        header("Location: criarsala.html");
+        exit();
+    } catch (Exception $e) {
+        $pdo->rollBack();
+        echo "Erro ao criar grupo: " . $e->getMessage();
+    }
+} else {
+    echo "Método de requisição inválido.";
 }
 ?>
