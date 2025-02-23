@@ -8,6 +8,7 @@
     $usuario = 'postgres';
     $senha = 'adler';
 
+
     try{
      //sgbd:host;port;DBname
      //usuario
