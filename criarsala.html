@@ -22,29 +22,30 @@
         <h3>Sistema de Organização <br>de Grupo de Estudos da UFES</h3>
     </header>
     
-    <div class="container">
-        <div class="branco">
-            <h2>{disciplina.nome}</h2>
-            <form class="formulario">
-                <div class="formulario-container">
+    <h2 class="nomedisciplina">{disciplina.nome}</h2>
+    
+    <div class="container">  
+            <div class="formulario">
+                <div class="info-container">  <!-- Quadrado ao redor -->
                     <div class="formulario-esquerda">
-                        <div class="infos">Criador do Grupo: <a>{?}</a></div>
-                        <div class="infos">Horário: <a>{horario.horaInicio} - {horario.horaFim}</a></div>
-                        <div class="infos">Local: <a>{lugar.nomeLocal}</a></div>
-                        <div class="infos">Data: <a>{horario.diaSemana}</a></div>
+                        <div class="info1">Criador do Grupo: <a>{?}</a></div>
+                        <div class="info2">Horário: <a>{horario.horaInicio} - {horario.horaFim}</a></div>
+                        <div class="info3">Local: <a>{lugar.nomeLocal}</a></div>
+                        <div class="info4">Data: <a>{horario.diaSemana}</a></div>
                     </div>
                     <div class="formulario-direita">
-                        <div class="infos">Descrição: <a>{lugar.descricaoLocal}</a></div>
-                        <div class="infos">Número de Vagas: <a>{grupoEstudo.qtdvagas}</a></div>
+                        <div class="info5">Descrição: <a>{lugar.descricaoLocal}</a></div>
+                        <div class="info6">Número de Vagas: <a>{grupoEstudo.qtdvagas}</a></div>
                     </div>
                 </div>
+            </div>
                 <div class="botoes">
                     <button type="submit" class="botao">Editar Grupo</button>
                     <button type="button" class="botao">Criar Grupo</button>
-                    <button type="button" class="botaodel">Excluir Grupo</button>
+                    <button type="button" class="botao">Excluir Grupo</button>
                 </div>
-            </form>
-        </div>
-    </div>        
+            </div>
+    
+    </div>      
 </body>
 </html>
