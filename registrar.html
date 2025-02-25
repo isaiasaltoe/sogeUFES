@@ -7,7 +7,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="login.css">
+        <link rel="stylesheet" href="registrar.css">
         <link rel="stylesheet" href="header.css">
     </head>
     <body>
@@ -20,25 +20,28 @@
                 <h3>Sistema de Organização <br>de Grupo de Estudos da UFES </h3>
             </div>
         </header>
-        <div class ="container_login">
+        <div class ="container_registro">
             <div class="conteudo">
                 <div class ="texto">
-                    <h2>Fazer login</h2>
-                    <p>Entre em sua conta para começar os estudos!</p>
+                    <h2>Crie sua conta</h2>
+                    <p>Cadastre seus dados</p>
                 </div>
-                <form action="login.php" method="post" class="formulario">
+                <form action="registrar.php" method= "post" class="formulario">
+                    <div class ="icone">
+                        <input type="text" id="idNome" name="nomeAluno" placeholder="     Nome"> 
+                    </div>
+                    <div class ="email">
+                        <input type="text" id="idEmail" name="emailAluno" placeholder="     E-mail">
+                    </div>
                     <div class ="livrofechado">
                         <input type="text" id="idMatricula" name="codMatricula" placeholder="     Matrícula"> 
                     </div>
                     <div class ="cadeado">
-                        <input type="password" id="idSenha" name="senhaAluno" placeholder="     Senha">
+                        <input type="password" id="idSenha" name="senhaAluno" placeholder="     Senha"> 
                     </div>
                     <button type="submit">
-                    <p>Fazer login</p>
+                    <p>Criar conta</p>
                     </button>
-                    <div class = "subtexto">
-                        <a href="registrar.html"><p><u>Criar conta</u></p></a>
-                    </div>
                 </form>
             </div>  
         </div>
