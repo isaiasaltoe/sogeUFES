@@ -13,7 +13,6 @@ html,body{
 
 }
 
-
 .imagem{
     background-color: white;
     width:25.208vw;
@@ -22,7 +21,6 @@ html,body{
     background: url('photos/foto.png') no-repeat center center;
     background-size: cover;
 }
-
 
 .conteudo{
     background-color:white;

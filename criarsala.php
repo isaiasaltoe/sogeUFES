@@ -1,3 +1,48 @@
+<?php
+// Configuração do banco de dados
+$host = 'localhost';
+$banco = 'trabalho';
+$usuario = 'postgres';
+$senha = '121007';
+
+try {
+    $pdo = new PDO("pgsql:host=$host;port=5432;dbname=$banco", $usuario, $senha, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]);
+} catch (PDOException $e) {
+    die("Erro ao conectar ao banco de dados: " . $e->getMessage());
+}
+
+// Função para buscar os dados do grupo
+function obterGrupoEstudo() {
+    global $pdo;
+    $stmt = $pdo->query("SELECT * FROM grupo_estudo LIMIT 1"); // Exemplo, ajuste conforme necessário
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+// Criar grupo
+if (isset($_POST['criar'])) {
+    $sql = "INSERT INTO grupo_estudo (disciplina, criador, horaInicio, horaFim, nomeLocal, descricaoLocal, diaSemana, qtdVagas) 
+            VALUES ('Matemática', 'Usuário', '14:00', '16:00', 'Biblioteca', 'Sala de estudo', 'Segunda-feira', 10)";
+    $pdo->exec($sql);
+    echo "Grupo criado com sucesso!";
+}
+
+// Editar grupo
+if (isset($_POST['editar'])) {
+    $sql = "UPDATE grupo_estudo SET qtdVagas = 8 WHERE id = 1"; // Ajuste conforme necessidade
+    $pdo->exec($sql);
+    echo "Grupo atualizado!";
+}
+
+// Excluir grupo
+if (isset($_POST['excluir'])) {
+    $sql = "DELETE FROM grupo_estudo WHERE id = 1"; // Ajuste conforme necessidade
+    $pdo->exec($sql);
+    echo "Grupo excluído!";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -21,6 +66,7 @@
         </div>
         <h3>Sistema de Organização <br>de Grupo de Estudos da UFES</h3>
     </header>
+
     
     <h2 class="nomedisciplina">{disciplina.nome}</h2>
     
