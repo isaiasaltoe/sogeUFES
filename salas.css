@@ -61,7 +61,9 @@ html, body {
     display: flex;
     padding: 5vh;
     flex-direction: column;
+    overflow: hidden; /* Esconde o excesso de conteúdo */
 }
+
 
 .branco h2, .branco p {
     margin: 0;
@@ -70,40 +72,33 @@ html, body {
 .salas {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 50px;
-    padding: 20px;
+    gap: 2vw;
     width: 100%;
     box-sizing: border-box;
+    overflow: auto;
 }
 
-.salas div {
-    width: 100%;
-    height: 14vh;
-    padding: 10px;
-    border: solid 1px rgba(15, 14, 14, 0.178);
-    border-radius: 10px;
-    background-color: white;
-    margin: 5px;
-    margin-left: -20px;
-}
+
 
 .sala {
-    height: 95px;
-    padding: 10px;
+    height: 100%;
+    padding-left: 3vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    width: calc(100%-3vh);
+    border: solid 1px rgba(15, 14, 14, 0.178);
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 2vh;
 }
+
 
 .sala h3 {
-    margin-bottom: 2vh;
+    margin-bottom: 3vh;
 }
 
-.sala p:first-of-type {
-    margin-top: 0;
-}
-
-.sala p {
-    margin-top: -10px;
+.sala p{
+    font-size:small;
 }

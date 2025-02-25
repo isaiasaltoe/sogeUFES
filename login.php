@@ -1,3 +1,4 @@
+
 <?php
 require_once 'conectaBD.php';
 // Conectar ao BD (com o PHP)
@@ -59,3 +60,4 @@ else {
 }
 die();
 ?>
+
