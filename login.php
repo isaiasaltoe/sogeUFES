@@ -11,8 +11,8 @@
     </header>
     <main>
         <?php 
-            $matricula = $_GET["matricula"];
-            $password = $_GET["senha"];
+            $matricula = $_POST["matricula"];
+            $password = $_POST["senha"];
             print "a matricula é ".$matricula. "<br>";
             print "a senha é " .$password;
         ?>
