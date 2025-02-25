@@ -19,16 +19,13 @@ function iniciarSessao($codMatricula, $senhaAluno) {
         if ($stmt->rowCount() == 1) {
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Definir as variáveis de sessão
             $_SESSION['codMatricula'] = $result['codMatricula'];
             $_SESSION['nomeAluno'] = $result['nomeAluno'];
             $_SESSION['emailAluno'] = $result['emailAluno'];
 
-            // Redirecionar para a página inicial
             header("Location: index.html");
             exit();
         } else {
-            // Falha na autenticação
             session_destroy();
             header("Location: login.html?msgErro=Credenciais inválidas.");
             exit();
@@ -38,7 +35,7 @@ function iniciarSessao($codMatricula, $senhaAluno) {
     }
 }
 
-// Verifica se houve envio de formulário e inicia a sessão
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['codMatricula']) && isset($_POST['senhaAluno'])) {
     iniciarSessao($_POST['codMatricula'], $_POST['senhaAluno']);
 } else {
