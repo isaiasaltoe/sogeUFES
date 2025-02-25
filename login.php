@@ -1,6 +1,9 @@
+
 <?php
-session_start();
 require_once 'conectaBD.php';
+require_once 'Sessao.php';
+
+
 
 function iniciarSessao($codMatricula, $senhaAluno) {
     global $pdo;
@@ -13,23 +16,21 @@ function iniciarSessao($codMatricula, $senhaAluno) {
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             ':codMatricula' => $codMatricula,
-            ':senhaAluno' => $senhaAluno
+            ':senhaAluno' => $senhaAluno,
+           
         ]);
 
         if ($stmt->rowCount() == 1) {
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            // Definir as variáveis de sessão
-            $_SESSION['codMatricula'] = $result['codMatricula'];
-            $_SESSION['nomeAluno'] = $result['nomeAluno'];
-            $_SESSION['emailAluno'] = $result['emailAluno'];
-
+            novaSessao($result['codmatricula'], $result['nomealuno']);
+                
             // Redirecionar para a página inicial
-            header("Location: index.html");
+            header("Location: index.php?mat=" . urlencode($result['codMatricula']));
             exit();
+            
         } else {
             // Falha na autenticação
-            session_destroy();
+           
             header("Location: login.html?msgErro=Credenciais inválidas.");
             exit();
         }

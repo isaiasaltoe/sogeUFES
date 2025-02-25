@@ -1,6 +1,6 @@
 <?php
  
- require_once 'verificarSessao.php';
+ require_once 'Sessao.php';
  verificarSessao();
  
 require_once 'conectaBD.php';
@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $pdo->commit();
 
-        header("Location: criarsala.html");
+        header("Location: criarsala.html?mat=" . urlencode($result['codMatricula']));
         exit();
     } catch (Exception $e) {
         $pdo->rollBack();
