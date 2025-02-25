@@ -1,63 +1,48 @@
-
 <?php
+session_start();
 require_once 'conectaBD.php';
-// Conectar ao BD (com o PHP)
-/*
-echo '<pre>';
-print_r($_POST);
-echo '</pre>';
-die();
-*/
 
-// Verificar se está chegando dados por POST
-if (!empty($_POST)) {
-  // Iniciar SESSAO (session_start)
-  session_start();
-  try {
-    // Montar a SQL
-    $sql = "SELECT codMatricula, senhaAluno, nomeAluno, emailAluno FROM aluno WHERE codMatricula = :codMatricula AND senhaAluno = :senhaAluno";
+function iniciarSessao($codMatricula, $senhaAluno) {
+    global $pdo;
 
-    // Preparar a SQL (pdo)
-    $stmt = $pdo->prepare($sql);
+    try {
+        $sql = "SELECT codMatricula, senhaAluno, nomeAluno, emailAluno 
+                FROM aluno 
+                WHERE codMatricula = :codMatricula AND senhaAluno = :senhaAluno";
 
-    // Definir/Organizar os dados p/ SQL
-    $dados = array(
-      ':codMatricula' => $_POST['codMatricula'],
-      ':senhaAluno' => ($_POST['senhaAluno'])
-    );
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':codMatricula' => $codMatricula,
+            ':senhaAluno' => $senhaAluno
+        ]);
 
-    $stmt->execute($dados);
-    //$stmt->execute(array(':email' => $_POST['email'], ':senha' => $_POST['senha']));
+        if ($stmt->rowCount() == 1) {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $result = $stmt->fetchAll();
+            // Definir as variáveis de sessão
+            $_SESSION['codMatricula'] = $result['codMatricula'];
+            $_SESSION['nomeAluno'] = $result['nomeAluno'];
+            $_SESSION['emailAluno'] = $result['emailAluno'];
 
-    if ($stmt->rowCount() == 1) { // Se o resultado da consulta SQL trouxer um registro
-      // Autenticação foi realizada com sucesso
-
-      $result = $result[0];
-      // Definir as variáveis de sessão
-      $_SESSION['nomeALuno'] = $result['nomeALuno'];
-      $_SESSION['emailAluno'] = $result['emailAluno'];
-      $_SESSION['codMatricula'] = $result['codMatricula'];
-      $_SESSION['senhaAluno'] = $result['senhaAluno'];
-
-      // Redirecionar p/ página inicial (ambiente logado)
-      header("Location: index.html");
-
-    } else { // Signifca que o resultado da consulta SQL não trouxe nenhum registro
-      // Falha na autenticaçao
-      // Destruir a SESSAO
-      session_destroy();
-      // Redirecionar p/ página inicial (login)
-      header("Location: login.html?msgErro=E-mail e/ou Senha inválido(s).");
+            // Redirecionar para a página inicial
+            header("Location: index.html");
+            exit();
+        } else {
+            // Falha na autenticação
+            session_destroy();
+            header("Location: login.html?msgErro=Credenciais inválidas.");
+            exit();
+        }
+    } catch (PDOException $e) {
+        die("Erro ao autenticar: " . $e->getMessage());
     }
-  } catch (PDOException $e) {
-    die($e->getMessage());
-  }
 }
-else {
-  header("Location: login.html?msgErro=Você não tem permissão para acessar esta página..");
-}
-die();
-?>
 
+// Verifica se houve envio de formulário e inicia a sessão
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['codMatricula']) && isset($_POST['senhaAluno'])) {
+    iniciarSessao($_POST['codMatricula'], $_POST['senhaAluno']);
+} else {
+    header("Location: login.html?msgErro=Você não tem permissão para acessar esta página.");
+    exit();
+}
+?>

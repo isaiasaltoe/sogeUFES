@@ -35,8 +35,12 @@
             <p>Escolha um grupo de estudo</p>
             <div class="salas">  
             <?php 
-            
+                
+                require_once 'verificarSessao.php';
+                verificarSessao();
+                
                 require_once 'conectaBD.php';
+
                
                 $sql =  "SELECT TO_CHAR(ho.dataHorario, 'DD/MM/YYYY') AS dataHorario, ge.idgrupoestudo, di.nomedisciplina,ho.horaInicio,lu.nomeLugar,lu.descricaoLugar,ge.qtdvagas, (ho.horaInicio + INTERVAL '2 HOURS') AS horaTermino FROM grupoEstudo AS ge 
 		                 JOIN horario AS ho ON  ho.idhorario = ge.idhorario
@@ -55,7 +59,7 @@
                   foreach ($grupos as $grupo):
                    
                    
-                    echo '<div action =  class="sala" id ='.$grupo['idgrupoestudo'].'>
+                    echo '<div action = "visualizarGrupo.php" class="sala" id ='.$grupo['idgrupoestudo'].'>
                             <h3>' . $grupo['nomedisciplina'] . '</h3>
                             <p>' . $grupo['descricaolugar'] . ', ' . $grupo['nomelugar'] . '</p>
                             <p>' . $grupo['qtdvagas'] . ' vagas totais</p>
