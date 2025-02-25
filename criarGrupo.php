@@ -1,6 +1,8 @@
 <?php
  
-session_start();
+ require_once 'verificarSessao.php';
+ verificarSessao();
+ 
 require_once 'conectaBD.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
