@@ -1,8 +1,7 @@
 <?php
  
- require_once 'Sessao.php';
- verificarSessao();
- 
+require_once 'Sessao.php';
+verificarSessao();
 require_once 'conectaBD.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -11,13 +10,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $disciplinaNome = $_POST['disciplina'] ?? NULL;
-    $horarioData = $_POST['horario'] ?? NULL;
-    $localNome = $_POST['local'] ?? NULL;
-    $data = $_POST['data'];
-    $descricao = $_POST['descricao'];
+    $disciplinaNome = trim($_POST['disciplina'] ?? NULL);
+    $horarioData = $_POST['dia'] ?? NULL;
+    $salaLugar = trim($_POST['sala'] ?? NULL);
+    $horarioHora = $_POST['horario'];
+    $predioLugar = trim($_POST['predio']);
     $codMatricula = $_SESSION['codMatricula'];
-
+    $descricao = trim($_POST['descricao']);
+     var_dump($_POST);
     if (!isset($pdo)) {
         echo "Erro: Falha na conexão com o banco de dados.";
         exit();
@@ -26,62 +26,81 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $pdo->beginTransaction();
 
-        $idDisciplina = NULL;
-        if ($disciplinaNome) {
-            $stmtDisciplina = $pdo->prepare("SELECT idDisciplina FROM disciplina WHERE nomeDisciplina = :nome");
+        // Verifica se a disciplina já existe
+        $stmtDisciplina = $pdo->prepare("SELECT idDisciplina FROM disciplina WHERE nomeDisciplina = :nome");
+        $stmtDisciplina->execute([':nome' => $disciplinaNome]);
+        $idDisciplina = $stmtDisciplina->fetchColumn();
+
+       // var_dump($idDisciplina);
+        if (!$idDisciplina) {
+        
+            $stmtDisciplina = $pdo->prepare("INSERT INTO disciplina (nomeDisciplina) VALUES (:nome) RETURNING idDisciplina");
             $stmtDisciplina->execute([':nome' => $disciplinaNome]);
             $idDisciplina = $stmtDisciplina->fetchColumn();
-
-            if (!$idDisciplina) {
-                $stmtInsertDisciplina = $pdo->prepare("INSERT INTO disciplina (nomeDisciplina) VALUES (:nome) RETURNING idDisciplina");
-                $stmtInsertDisciplina->execute([':nome' => $disciplinaNome]);
-                $idDisciplina = $stmtInsertDisciplina->fetchColumn();
-            }
+            var_dump($idDisciplina);
         }
 
-        $idHorario = NULL;
-        if ($horarioData) {
-            $stmtHorario = $pdo->prepare("SELECT idHorario FROM horario WHERE dataHorario = :data");
-            $stmtHorario->execute([':data' => $horarioData]);
-            $idHorario = $stmtHorario->fetchColumn();
-
-            if (!$idHorario) {
-                $stmtInsertHorario = $pdo->prepare("INSERT INTO horario (dataHorario, horaInicio) VALUES (:data, '00:00') RETURNING idHorario");
-                $stmtInsertHorario->execute([':data' => $horarioData]);
-                $idHorario = $stmtInsertHorario->fetchColumn();
-            }
-        }
-
-        $idLugar = NULL;
-        if ($localNome) {
-            $stmtLugar = $pdo->prepare("SELECT idLugar FROM lugar WHERE nomeLugar = :nome");
-            $stmtLugar->execute([':nome' => $localNome]);
-            $idLugar = $stmtLugar->fetchColumn();
-
-            if (!$idLugar) {
-                $stmtInsertLugar = $pdo->prepare("INSERT INTO lugar (nomeLugar, capacidadeLugar) VALUES (:nome, 10) RETURNING idLugar");
-                $stmtInsertLugar->execute([':nome' => $localNome]);
-                $idLugar = $stmtInsertLugar->fetchColumn();
-            }
-        }
-
-        $sqlGrupo = "INSERT INTO grupoEstudo (idHorario, idDisciplina, idLugar, descricao, qtdvagas, codMatricula)
-                     VALUES (:horario, :disciplina, :local, :descricao, 5, :codMatricula) RETURNING idGrupoEstudo";
-
+       
+        $sqlGrupo = "INSERT INTO grupoEstudo (idDisciplina, descricao, qtdVagas, aluno_idCriadorGrupo)
+                     VALUES (:disciplina, :descricao, 5, :codMatricula) RETURNING idGrupoEstudo";
         $stmtGrupo = $pdo->prepare($sqlGrupo);
         $stmtGrupo->execute([
-            ':horario' => $idHorario,
             ':disciplina' => $idDisciplina,
-            ':local' => $idLugar,
             ':descricao' => $descricao,
             ':codMatricula' => $codMatricula
         ]);
-
         $idGrupoEstudo = $stmtGrupo->fetchColumn();
 
-        $sqlParticipacao = "INSERT INTO participacao (dataEntrada, status, codMatricula, idGrupoEstudo)
-                            VALUES (:dataEntrada, 'Criador', :codMatricula, :idGrupoEstudo)";
+        // Verifica se o lugar já existe
+        $stmtLugar = $pdo->prepare("SELECT idLugar FROM lugar WHERE salaLugar = :sala AND predioLugar = :predio");
+        $stmtLugar->execute([
+            ':sala' => $salaLugar,
+            ':predio' => $predioLugar
+        ]);
+        $idLugar = $stmtLugar->fetchColumn();
 
+        if (!$idLugar) {
+            // Insere novo lugar caso não exista
+            $stmtLugar = $pdo->prepare("INSERT INTO lugar (salaLugar, predioLugar) VALUES (:sala, :predio) RETURNING idLugar");
+            $stmtLugar->execute([
+                ':sala' => $salaLugar,
+                ':predio' => $predioLugar
+            ]);
+            $idLugar = $stmtLugar->fetchColumn();
+        }
+
+        // Verifica se o horário já existe
+        $stmtHorario = $pdo->prepare("SELECT idHorario FROM horario WHERE dataHorario = :data AND horaInicio = :hora");
+        $stmtHorario->execute([
+            ':data' => $horarioData,
+            ':hora' => $horarioHora
+        ]);
+        $idHorario = $stmtHorario->fetchColumn();
+
+        if (!$idHorario) {
+            
+            $stmtHorario = $pdo->prepare("INSERT INTO horario (dataHorario, horaInicio) VALUES (:data, :hora) RETURNING idHorario");
+            $stmtHorario->execute([
+                ':data' => $horarioData,
+                ':hora' => $horarioHora
+            ]);
+            $idHorario = $stmtHorario->fetchColumn();
+        }
+
+        // Insere na agenda
+        $sqlAgenda = "INSERT INTO agenda (idLugar, idHorario, idGrupoEstudo) 
+                      VALUES (:lugar, :horario, :grupo)";
+        $stmtAgenda = $pdo->prepare($sqlAgenda);
+        $stmtAgenda->execute([
+            ':lugar' => $idLugar,
+            ':horario' => $idHorario,
+            ':grupo' => $idGrupoEstudo
+        ]);
+
+        // Insere a participação do criador do grupo
+        $data = date('Y-m-d H:i:s');
+        $sqlParticipacao = "INSERT INTO participacao (dataEntrada, situacao, codMatricula, idGrupoEstudo)
+                            VALUES (:dataEntrada, 'ativo', :codMatricula, :idGrupoEstudo)";
         $stmtParticipacao = $pdo->prepare($sqlParticipacao);
         $stmtParticipacao->execute([
             ':dataEntrada' => $data,
@@ -91,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $pdo->commit();
 
-        header("Location: criarsala.html?mat=" . urlencode($result['codMatricula']));
+        header("Location: criarsala.html?mat=" . urlencode($codMatricula));
         exit();
     } catch (Exception $e) {
         $pdo->rollBack();
@@ -100,5 +119,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Método de requisição inválido.";
 }
-
 ?>
