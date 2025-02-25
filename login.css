@@ -116,11 +116,3 @@ body{
     font-size: 2.4870466321243523vh;
 
 }
-
-.cadeado input:not(:placeholder-shown)  {
-    background-image: none;
-}
-
-.livrofechado input:not(:placeholder-shown)  {
-    background-image: none;
-}
