@@ -23,16 +23,27 @@
             </div>
             <h3>Sistema de Organização <br>de Grupo de Estudos da UFES </h3>
         </div>
+
+        <?php
+            session_start();
+
+            require_once 'Sessao.php';
+
+            if(isset($_GET['logout'])){
+                encerrarSessao();
+            }
+        ?>
+
         <div class ="nome">
             <h5> <?php echo $_SESSION['nomeAluno']?></h5>
             <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
-            <a href="?encerrarSessao()=1"><img src="photos\logout.png" alt="logout"></a>
+            <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>
         </div>
         
     </header> 
     <div class ="container">
         <?php
-            session_start();
+            //session_start();
             if (!isset($_SESSION['codMatricula'])) {
                 header("?msgErro=Faça login primeiro.");
             }else{
@@ -45,6 +56,7 @@
         ?>
 
         <div class="branco">
+
             <div class="imagem"></div>
             <div class="conteudo">
                 <h1>Como funciona o sogeUFES</h1>
@@ -58,12 +70,15 @@
                         <button>Procurar grupos</button>
                     </a>
                     <button>Baixar aplicativo mobile</button>
-                    <a href="https://localhost/sogeufes/criarGrupo.html?mat=<?php echo urlencode($_SESSION['codMatricula']); ?>">
+
+                    <a href="https://localhost/sogeufes/criarGrupo.php?mat=<?php echo urlencode($_SESSION['codMatricula']); ?>">
+
                         <button>Criar grupo</button>
                     </a>
                     
                 </div>
             </div>
+
             </div>
         </div>
     </div>    
