@@ -1,57 +1,6 @@
 html, body {
     font-family: "Poppins", serif;
-    margin: 0;
-    padding: 0;
-    background-color: #EFF6FF;
-}
-
-.header {
-    background-color: #1E3A8A;
-    width: 100%;
-    height: 13vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header img[alt="icone"] {
-    margin-right: 30px;
-    width: 2.083vw;
-}
-
-.titulo {
-    display: flex;
-    gap: 5px;
-    margin-left: 10px;
-}
-
-.header h1 {
-    color: white;
-    font-size: 2.083vw;
-    font-family: "Poppins", serif;
-    font-style: normal;
-    font-weight: 700;
-    margin: 0;
-}
-
-.header h3 {
-    color: white;
-    font-size: 1.042vw;
-    font-family: "Poppins", serif;
-    font-style: normal;
-    font-weight: 400;
-    margin: 0;
-    margin-left: 10px;
-    display: flex;
-}
-
-.container {
-    background-color: #EFF6FF;
-    width: 100%;
-    height: calc(100vh - 123px) !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   
 }
 
 .branco {
@@ -64,7 +13,6 @@ html, body {
     overflow: hidden; /* Esconde o excesso de conteúdo */
 }
 
-
 .branco h2, .branco p {
     margin: 0;
 }
@@ -74,14 +22,15 @@ html, body {
     grid-template-columns: repeat(3, 1fr);
     gap: 2vw;
     width: 100%;
+    height: 100%;
     box-sizing: border-box;
     overflow: auto;
 }
-
-
-
+.header{
+    display:list-item;
+}
 .sala {
-    height: 100%;
+    height: 25vh;
     padding-left: 3vh;
     display: flex;
     flex-direction: column;
@@ -92,6 +41,11 @@ html, body {
     border-radius: 10px;
     background-color: white;
     margin-top: 2vh;
+}
+
+.salas a {
+    text-decoration: none; /* Remove o sublinhado */
+    color: inherit; /* Mantém a cor do texto original */
 }
 
 

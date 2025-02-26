@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -24,8 +22,22 @@
             </div>
             <h3>Sistema de Organização <br>de Grupo de Estudos da UFES</h3>
         </div>
-        <div>
-            <a href="http://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone"></a>
+
+        
+        <?php 
+             require_once 'Sessao.php';
+             verificarSessao();
+          
+            if(isset($_GET['logout'])){
+                encerrarSessao();
+            }
+        ?>
+
+        <div class ="nome">
+            <h5> <?php echo $_SESSION['nomeAluno']?></h5>
+            <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
+            <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>
+
         </div>
     </header>
 
@@ -36,20 +48,21 @@
             <div class="salas">  
             <?php 
                 
-                require_once 'Sessao.php';
-                verificarSessao();
+
                 
+
                 require_once 'conectaBD.php';
 
                
-                $sql =  "SELECT TO_CHAR(ho.dataHorario, 'DD/MM/YYYY') AS dataHorario, ge.idgrupoestudo, di.nomedisciplina,ho.horaInicio,lu.nomeLugar,lu.descricaoLugar,ge.qtdvagas, (ho.horaInicio + INTERVAL '2 HOURS') AS horaTermino FROM grupoEstudo AS ge 
-		                 JOIN horario AS ho ON  ho.idhorario = ge.idhorario
-		                 JOIN lugar AS lu ON  lu.idlugar = ge.idlugar
-	                     JOIN disciplina AS di ON  di.iddisciplina = ge.iddisciplina
+                $sql =  "SELECT TO_CHAR(ho.dataHorario, 'DD/MM/YYYY') AS dataHorario, ge.idgrupoestudo, di.nomedisciplina,ho.horaInicio,lu.salaLugar,lu.predioLugar,ge.qtdvagas, (ho.horaInicio + INTERVAL '2 HOURS') AS horaTermino FROM grupoEstudo AS ge 
+		                JOIN agenda AS ag ON ag.idGrupoEstudo = ge.idGrupoEstudo
+                        JOIN horario AS ho ON ho.idHorario = ag.idHorario
+                        JOIN lugar AS lu ON lu.idLugar = ag.idLugar
+	                    JOIN disciplina AS di ON  di.iddisciplina = ge.iddisciplina
 	                 WHERE qtdvagas >= (
                          SELECT COUNT(pa.codmatricula)
 		  	                FROM participacao AS pa JOIN grupoEstudo AS ge  ON ge.idGrupoEstudo = pa.idGrupoEstudo
-			                  WHERE status = 'confirmado')";
+			                  WHERE situacao = 'confirmado')";
                  
                  $query = $pdo->prepare($sql); 
                  $query->execute();
@@ -59,13 +72,18 @@
                   foreach ($grupos as $grupo):
                    
                    
-                    echo '<div action = "visualizarGrupo.php" class="sala" id ='.$grupo['idgrupoestudo'].'>
+
+
+                    echo '<a href = "criarsala.php?id='.$grupo['idgrupoestudo'].'" class="sala" id ='.$grupo['idgrupoestudo'].'>
+
                             <h3>' . $grupo['nomedisciplina'] . '</h3>
-                            <p>' . $grupo['descricaolugar'] . ', ' . $grupo['nomelugar'] . '</p>
+                            <p>' . $grupo['salalugar'] . ', ' . $grupo['prediolugar'] . '</p>
                             <p>' . $grupo['qtdvagas'] . ' vagas totais</p>
                             <p>' . $grupo['horainicio'] . ' - ' . $grupo['horatermino'] . '</p>
                             <p>'.$grupo['datahorario'].'</p>
-                    </div>';
+
+                    </a>';
+
                  
                endforeach
 
