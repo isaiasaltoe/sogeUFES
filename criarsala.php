@@ -51,12 +51,29 @@ if (isset($_POST['excluir'])) {
     <link href="criarsala.css" rel="stylesheet">
 </head>
 <body>
-    <header class="header">
-        <div class="titulo">
-            <h1>sogeUFES</h1>
-            <img src="photos/5402751 2.png" alt="livro" style="width:2.5vw">
+<header class="header">
+        <div>
+            <div class="titulo">
+                <h1>sogeUFES</h1>
+                <a href="http://localhost/sogeufes/"><img src="photos/5402751 2.png" alt="livro" style ="width:2.5vw"></a>
+            </div>
+            <h3>Sistema de Organização <br>de Grupo de Estudos da UFES</h3>
         </div>
-        <h3>Sistema de Organização <br>de Grupo de Estudos da UFES</h3>
+        
+        <?php 
+            
+          
+            if(isset($_GET['logout'])){
+                encerrarSessao();
+            }
+        ?>
+
+        <div class ="nome">
+            <h5> <?php echo $_SESSION['nomeAluno']?></h5>
+            <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
+            <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>
+        </div>
+
     </header>
 
     

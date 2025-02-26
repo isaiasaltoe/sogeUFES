@@ -4,10 +4,9 @@
     //usuario
     //senha
     $endereco = 'localhost';
-    $banco = 'SOGE';
+    $banco = 'soge';
     $usuario = 'postgres';
-    $senha = 'adler';
-
+    $senha = 'Neguim03';
 
 
     try{
