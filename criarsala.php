@@ -2,7 +2,7 @@
 // Configuração do banco de dados
 require_once 'Sessao.php';
 verificarSessao();
-                
+
 require_once 'conectaBD.php';
 
 // Função para buscar os dados do grupo
