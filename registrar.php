@@ -31,7 +31,7 @@
                     }
                           
                 } catch (PDOException $e) {
-                    header("Location: index.html?msgErro=falha ao cadastrar");
+                    header("Location: index.php?msgErro=falha ao cadastrar");
                  }
 
                 }

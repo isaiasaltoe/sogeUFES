@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -28,6 +29,20 @@
         
     </header> 
     <div class ="container">
+        <?php
+            session_start();
+            if (!isset($_SESSION['codMatricula'])) {
+                header("?msgErro=Faça login primeiro.");
+              exit();
+            }else{
+                $nomeAluno = $_SESSION['nomeAluno'] ?? $_GET['nome'] ?? 'Usuário';
+                $emailAluno = $_SESSION['emailAluno'] ?? $_GET['email'] ?? 'E-mail não disponível';
+
+            }
+            
+          
+        ?>
+
         <div class="branco">
             <div class="imagem"></div>
             <div class="conteudo">
@@ -36,12 +51,13 @@
                 <p>
                 O aplicativo de Grupos de Estudo da UFES foi criado para facilitar a formação de grupos acadêmicos, promovendo colaboração e aprendizado entre os estudantes. Com ele, é possível criar salas de estudo para disciplinas ou projetos, escolhendo entre as salas do prédio que já foram dedicadas exclusivamente a este projeto. Além disso, os estudantes podem encontrar facilmente salas de estudo já criadas por outros, organizadas por curso, disciplina ou interesse. Cada sala inclui informações importantes, como horário, disciplina, número de participantes e recursos disponíveis, proporcionando uma organização simples e eficiente. O aplicativo garante que os estudantes sempre tenham um espaço apropriado para estudar, colaborar e trocar conhecimentos, otimizando o uso das salas já alocadas para esse fim.
                 </p>
+                
                 <div class="botoes">
-                    <a href="https://localhost/sogeufes/salas.html">
+                <a href="https://localhost/sogeufes/salas.php?mat=<?php echo urlencode($_SESSION['codMatricula']); ?>">
                         <button>Procurar grupos</button>
                     </a>
                     <button>Baixar aplicativo mobile</button>
-                    <a href="https://localhost/sogeufes/criarGrupo.html">
+                    <a href="https://localhost/sogeufes/criarGrupo.html?mat=<?php echo urlencode($_SESSION['codMatricula']); ?>">
                         <button>Criar grupo</button>
                     </a>
                     
