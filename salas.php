@@ -38,18 +38,18 @@
                 
                 require_once 'Sessao.php';
                 verificarSessao();
-                
                 require_once 'conectaBD.php';
 
                
-                $sql =  "SELECT TO_CHAR(ho.dataHorario, 'DD/MM/YYYY') AS dataHorario, ge.idgrupoestudo, di.nomedisciplina,ho.horaInicio,lu.nomeLugar,lu.descricaoLugar,ge.qtdvagas, (ho.horaInicio + INTERVAL '2 HOURS') AS horaTermino FROM grupoEstudo AS ge 
-		                 JOIN horario AS ho ON  ho.idhorario = ge.idhorario
-		                 JOIN lugar AS lu ON  lu.idlugar = ge.idlugar
-	                     JOIN disciplina AS di ON  di.iddisciplina = ge.iddisciplina
+                $sql =  "SELECT TO_CHAR(ho.dataHorario, 'DD/MM/YYYY') AS dataHorario, ge.idgrupoestudo, di.nomedisciplina,ho.horaInicio,lu.salaLugar,lu.predioLugar,ge.qtdvagas, (ho.horaInicio + INTERVAL '2 HOURS') AS horaTermino FROM grupoEstudo AS ge 
+		                JOIN agenda AS ag ON ag.idGrupoEstudo = ge.idGrupoEstudo
+                        JOIN horario AS ho ON ho.idHorario = ag.idHorario
+                        JOIN lugar AS lu ON lu.idLugar = ag.idLugar
+	                    JOIN disciplina AS di ON  di.iddisciplina = ge.iddisciplina
 	                 WHERE qtdvagas >= (
                          SELECT COUNT(pa.codmatricula)
 		  	                FROM participacao AS pa JOIN grupoEstudo AS ge  ON ge.idGrupoEstudo = pa.idGrupoEstudo
-			                  WHERE status = 'confirmado')";
+			                  WHERE situacao = 'confirmado')";
                  
                  $query = $pdo->prepare($sql); 
                  $query->execute();
@@ -61,7 +61,7 @@
                    
                     echo '<div action = "visualizarGrupo.php" class="sala" id ='.$grupo['idgrupoestudo'].'>
                             <h3>' . $grupo['nomedisciplina'] . '</h3>
-                            <p>' . $grupo['descricaolugar'] . ', ' . $grupo['nomelugar'] . '</p>
+                            <p>' . $grupo['salalugar'] . ', ' . $grupo['prediolugar'] . '</p>
                             <p>' . $grupo['qtdvagas'] . ' vagas totais</p>
                             <p>' . $grupo['horainicio'] . ' - ' . $grupo['horatermino'] . '</p>
                             <p>'.$grupo['datahorario'].'</p>
