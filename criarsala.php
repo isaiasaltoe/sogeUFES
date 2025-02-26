@@ -1,17 +1,8 @@
 <?php
 // Configuração do banco de dados
-$host = 'localhost';
-$banco = 'trabalho';
-$usuario = 'postgres';
-$senha = '121007';
-
-try {
-    $pdo = new PDO("pgsql:host=$host;port=5432;dbname=$banco", $usuario, $senha, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]);
-} catch (PDOException $e) {
-    die("Erro ao conectar ao banco de dados: " . $e->getMessage());
-}
+require_once 'Sessao.php';
+verificarSessao();
+require_once 'conectaBD.php';
 
 // Função para buscar os dados do grupo
 function obterGrupoEstudo() {

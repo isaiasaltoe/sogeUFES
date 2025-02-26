@@ -1,8 +1,8 @@
 <?php
  
-require_once 'Sessao.php';
-verificarSessao();
-require_once 'conectaBD.php';
+ require_once 'Sessao.php';
+ verificarSessao();
+ require_once 'conectaBD.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!isset($_SESSION['codMatricula'])) {
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $pdo->beginTransaction();
 
-        // Verifica se a disciplina já existe
+
         $stmtDisciplina = $pdo->prepare("SELECT idDisciplina FROM disciplina WHERE nomeDisciplina = :nome");
         $stmtDisciplina->execute([':nome' => $disciplinaNome]);
         $idDisciplina = $stmtDisciplina->fetchColumn();
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ]);
         $idGrupoEstudo = $stmtGrupo->fetchColumn();
 
-        // Verifica se o lugar já existe
+ 
         $stmtLugar = $pdo->prepare("SELECT idLugar FROM lugar WHERE salaLugar = :sala AND predioLugar = :predio");
         $stmtLugar->execute([
             ':sala' => $salaLugar,
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $idLugar = $stmtLugar->fetchColumn();
 
         if (!$idLugar) {
-            // Insere novo lugar caso não exista
+          
             $stmtLugar = $pdo->prepare("INSERT INTO lugar (salaLugar, predioLugar) VALUES (:sala, :predio) RETURNING idLugar");
             $stmtLugar->execute([
                 ':sala' => $salaLugar,
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $idLugar = $stmtLugar->fetchColumn();
         }
 
-        // Verifica se o horário já existe
+    
         $stmtHorario = $pdo->prepare("SELECT idHorario FROM horario WHERE dataHorario = :data AND horaInicio = :hora");
         $stmtHorario->execute([
             ':data' => $horarioData,
@@ -86,8 +86,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ]);
             $idHorario = $stmtHorario->fetchColumn();
         }
+            // Verifica se já existe um grupo de estudo no mesmo local, data e horário
+        $stmtVerificaGrupo = $pdo->prepare("
+        SELECT agenda.idGrupoEstudo
+        FROM agenda
+        INNER JOIN grupoEstudo ON agenda.idGrupoEstudo = grupoEstudo.idGrupoEstudo
+        WHERE agenda.idLugar = :lugar 
+          AND agenda.idHorario = :horario
+    ");
+    $stmtVerificaGrupo->execute([
+        ':lugar' => $idLugar,
+        ':horario' => $idHorario
+    ]);
+    $grupoExistente = $stmtVerificaGrupo->fetchColumn();
 
-        // Insere na agenda
+    if ($grupoExistente) {
+        echo "Erro: Já existe um grupo de estudo agendado para este horário e local.";
+        $pdo->rollBack();
+        exit();
+    }   
+
         $sqlAgenda = "INSERT INTO agenda (idLugar, idHorario, idGrupoEstudo) 
                       VALUES (:lugar, :horario, :grupo)";
         $stmtAgenda = $pdo->prepare($sqlAgenda);
@@ -97,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':grupo' => $idGrupoEstudo
         ]);
 
-        // Insere a participação do criador do grupo
+   
         $data = date('Y-m-d H:i:s');
         $sqlParticipacao = "INSERT INTO participacao (dataEntrada, situacao, codMatricula, idGrupoEstudo)
                             VALUES (:dataEntrada, 'ativo', :codMatricula, :idGrupoEstudo)";

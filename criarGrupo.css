@@ -141,7 +141,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .sala input{
-    background-size: 24px 24px;
+    background-size: 4.974093264248705vh;
     background-image: url(photos/Home.png);
     background-repeat: no-repeat;
     background-position: 10px center;
