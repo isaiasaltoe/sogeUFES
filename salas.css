@@ -43,6 +43,12 @@ html, body {
     margin-top: 2vh;
 }
 
+.salas a {
+    text-decoration: none; /* Remove o sublinhado */
+    color: inherit; /* Mantém a cor do texto original */
+}
+
+
 .sala h3 {
     margin-bottom: 3vh;
 }

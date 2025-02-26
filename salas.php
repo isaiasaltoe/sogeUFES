@@ -59,13 +59,13 @@
                   foreach ($grupos as $grupo):
                    
                    
-                    echo '<div action = "visualizarGrupo.php" class="sala" id ='.$grupo['idgrupoestudo'].'>
+                    echo '<a href = "criarsala.php?id='.$grupo['idgrupoestudo'].'" class="sala" id ='.$grupo['idgrupoestudo'].'>
                             <h3>' . $grupo['nomedisciplina'] . '</h3>
                             <p>' . $grupo['salalugar'] . ', ' . $grupo['prediolugar'] . '</p>
                             <p>' . $grupo['qtdvagas'] . ' vagas totais</p>
                             <p>' . $grupo['horainicio'] . ' - ' . $grupo['horatermino'] . '</p>
                             <p>'.$grupo['datahorario'].'</p>
-                    </div>';
+                    </a>';
                  
                endforeach
 
