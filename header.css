@@ -1,7 +1,9 @@
 html,body{
+    font-family: "Poppins", serif;
     margin: 0;
     padding: 0;
-    background-color: #EFF6FF; 
+    background-color: #EFF6FF;
+    
 }
 
 .header{
@@ -16,7 +18,7 @@ html,body{
 
 .header img[alt="icone"]{
     margin-right: 30px;
-    width: 2.083vw;
+    width: 2.5vw;
 }
 
 
