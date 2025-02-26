@@ -85,3 +85,22 @@ html,body{
     margin-left:10px;
     display: flex;
 }
+
+.nome{
+    display:flex;
+    align-items: center;
+    gap: 1.1979166666666667vw;
+    font-size: 3.316062176165803vh;
+    color:white;
+    font-family: "Poppins", serif;
+    font-style: normal;
+}
+
+.nome a{
+    display:flex;
+    align-items: center;
+}
+
+.nome h5{
+    font-weight: 400;
+}
