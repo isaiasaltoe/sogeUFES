@@ -17,7 +17,19 @@ function verificarSessao() {
         header("Location: login.php");
         exit();
     }
+    return true;
 }
+
+function verificarIndex() {
+    session_start(); 
+    
+    if (!isset($_SESSION['codMatricula'])) {
+       return false;
+    }
+    return true;
+}
+
+
 
 function encerrarSessao() {
     session_start();
