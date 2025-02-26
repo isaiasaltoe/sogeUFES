@@ -1,14 +1,7 @@
 <?php 
-require_once 'verificarSessao.php';
+require_once 'Sessao.php';
+
 verificarSessao();
-
-
-
-
-
-
-
-
 
 
 
