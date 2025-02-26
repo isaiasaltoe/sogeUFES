@@ -1,0 +1,58 @@
+html, body {
+    font-family: "Poppins", serif;
+   
+}
+
+.branco {
+    background-color: white;
+    width: 62.5vw;
+    height: 58.5vh;
+    display: flex;
+    padding: 5vh;
+    flex-direction: column;
+    overflow: hidden; /* Esconde o excesso de conteúdo */
+}
+
+.branco h2, .branco p {
+    margin: 0;
+}
+
+.salas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2vw;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+}
+.header{
+    display:list-item;
+}
+.sala {
+    height: 25vh;
+    padding-left: 3vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: calc(100%-3vh);
+    border: solid 1px rgba(15, 14, 14, 0.178);
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 2vh;
+}
+
+.salas a {
+    text-decoration: none; /* Remove o sublinhado */
+    color: inherit; /* Mantém a cor do texto original */
+}
+
+
+.sala h3 {
+    margin-bottom: 3vh;
+}
+
+.sala p{
+    font-size:small;
+}

@@ -1,0 +1,172 @@
+
+body, html {
+    overflow: auto;
+    height: 100%; 
+    width: 100%;
+
+    }
+    
+.container_criarGrupo{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #EFF6FF;
+    width: 100%;
+    align-items: center;
+    min-height: 100vh;
+    padding-bottom: 1vh;
+   
+   
+}
+
+.texto h2{
+    color:black;
+    font-size:3.5vw;
+    font-family: "Poppins", serif;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0;
+    margin-top: 1vh;
+    text-align: center; 
+    margin-left: -2vw ;
+}
+
+.conteudo{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    max-width:500px ;
+  
+}
+
+
+.formulario{
+    max-width: 500px;
+    width: 100%;
+    padding: 10px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vh;
+}
+
+.formulario button{
+    font-size: 1.2rem;
+    background-color: #3B82F6;
+    color:white;
+    height: 45px;
+    width:80%;
+    max-width: 200px;
+    border-radius: 30px;
+    border: none;
+    font-family: "Poppins", serif;
+    font-weight: 700;
+    margin: 0;
+    
+}
+
+.formulario p{
+    margin: 0;
+}
+
+.formulario input{
+    background-color: white;
+    border:none;   
+    font-size:3.316062176165803vh;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    width: 100%;
+    padding: 8px;
+    height: 4.5vh;
+    max-height: 50px;
+    
+}
+
+.livroaberto input{
+    background-size: 4.974093264248705vh;
+    background-image: url(photos/Bookopen.png);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    text-indent: 5.581347150259067vh;
+    height: 6vh;
+    width: 35vw;
+    margin-bottom: 3vh;
+}
+
+
+.relogio input{
+    
+    background-size: 4.974093264248705vh;
+    background-image: url(photos/Clock.png);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    text-indent: 2.98vh;
+    height: 6vh;
+    width: 35vw;
+    margin-bottom: 3vh;
+}
+
+.data input{
+    background-size: 4.974093264248705vh;
+    background-image: url(photos/Calendar.png);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    text-indent: 2.5vh;
+    height: 6vh;
+    width: 35vw;
+    margin-bottom: 3vh;
+}
+
+
+input[type="time"]::-webkit-calendar-picker-indicator{
+    display:none;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.local input{
+    background-size: 4.974093264248705vh;
+    background-image: url(photos/Home.png);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    text-indent: 5.181347150259067vh;
+    height: 6vh;
+    width: 35vw;
+    margin-bottom: 3vh;
+}
+
+.sala input{
+    background-size: 4.974093264248705vh;
+    background-image: url(photos/Home.png);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    text-indent: 5.181347150259067vh;
+    height: 6vh;
+    width: 35vw;
+    margin-bottom: 3vh;
+}
+
+.descricao input{
+    background-size: 4.974093264248705vh;
+    background-image: url(photos/Bookopen.png);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    text-indent: 5.181347150259067vh;
+    height: 6vh;
+    width: 35vw;
+    margin-bottom: 3vh;
+}
+
+.agenda {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.agenda div{
+    width: 50%;
+}

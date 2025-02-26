@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="login.css">
+        <link rel="stylesheet" href="header.css">
+    </head>
+    <body>
+        <header class="barra_lado">
+            <div>
+                <div class="titulo">
+                    <h1>sogeUFES</h1>
+                    <a href="http://localhost/sogeufes/"><img src="photos\5402751 2.png" alt="livro" style ="width:2.5vw"></a>
+                </div>
+                <h3>Sistema de Organização <br>de Grupo de Estudos da UFES </h3>
+            </div>
+        </header>
+        <div class ="container_login">
+            <div class="conteudo">
+                <div class ="texto">
+                    <h2>Fazer login</h2>
+                    <p>Entre em sua conta para começar os estudos!</p>
+                </div>
+                <form action="login.php" method="post" class="formulario">
+                    <div class ="livrofechado">
+                        <input type="text" id="idMatricula" name="codMatricula" placeholder="Matrícula" required style="text-indent:45px;"> 
+                    </div>
+                    <div class ="cadeado">
+                        <input type="password" id="idSenha" name="senhaAluno" placeholder="Senha" required style="text-indent:45px;">
+                    </div>
+                    <button type="submit">
+                    <p>Fazer login</p>
+                    </button>
+                    <div class = "subtexto">
+                        <a href="registrar.html"><p><u>Criar conta</u></p></a>
+                    </div>
+                </form>
+            </div>  
+        </div>
+
+
+    </body>
+</html>

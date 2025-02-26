@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,22 +10,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-    <link href ="main.css" rel="stylesheet" >
+    <link href ="homepage.css" rel="stylesheet" >
+    <link href ="header.css" rel="stylesheet" >
 
 </head>
 <body>
     <header class = "header">
-        <div class ="titulo">
-            <h1>sogeUFES</h1> 
-            <img src="5402751 2.png" alt="livro">
+        <div>
+            <div class ="titulo">
+                <h1>sogeUFES</h1> 
+            <img src="photos\5402751 2.png" alt="livro" style ="width:2.5vw">
+            </div>
+            <h3>Sistema de Organização <br>de Grupo de Estudos da UFES </h3>
         </div>
-<<<<<<< Updated upstream
+
         <h3>Sistema de Organização <br>de Grupo de Estudos da UFES </h3>
+
+        <div class ="nome">
+            <h5> <?php echo $_SESSION['nomeAluno']?></h5>
+            <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
+            <a href="?encerrarSessao()=1"><img src="photos\logout.png" alt="logout"></a>
+        </div>
+        
     </header> 
     <div class ="container">
+        <?php
+            session_start();
+            if (!isset($_SESSION['codMatricula'])) {
+                header("?msgErro=Faça login primeiro.");
+            }else{
+                $nomeAluno = $_SESSION['nomeAluno'] ?? $_GET['nome'] ?? 'Usuário';
+                $emailAluno = $_SESSION['emailAluno'] ?? $_GET['email'] ?? 'E-mail não disponível';
+
+            }
+            
+          
+        ?>
+
         <div class="branco">
+
             <div class="imagem">
-=======
+
         <?php
             session_start();
 
@@ -57,6 +83,7 @@
         ?>
 
         <div class="branco">
+
             <div class="imagem"></div>
             <div class="conteudo">
                 <h1>Como funciona o sogeUFES</h1>
@@ -70,15 +97,16 @@
                         <button>Procurar grupos</button>
                     </a>
                     <button>Baixar aplicativo mobile</button>
+
                     <a href="https://localhost/sogeufes/criarGrupo.php?mat=<?php echo urlencode($_SESSION['codMatricula']); ?>">
+
                         <button>Criar grupo</button>
                     </a>
                     
                 </div>
             </div>
->>>>>>> Stashed changes
+
             </div>
-            <div class="conteudo"></div>
         </div>
     </div>    
 </body>

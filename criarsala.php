@@ -73,6 +73,7 @@ if (isset($_POST['excluir'])) {
             <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
             <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>
         </div>
+
     </header>
 
     
