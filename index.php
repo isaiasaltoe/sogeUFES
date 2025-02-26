@@ -19,12 +19,14 @@
         <div>
             <div class ="titulo">
                 <h1>sogeUFES</h1> 
-                <img src="photos\5402751 2.png" alt="livro" style ="width:2.5vw">
+            <img src="photos\5402751 2.png" alt="livro" style ="width:2.5vw">
             </div>
             <h3>Sistema de Organização <br>de Grupo de Estudos da UFES </h3>
         </div>
-        <div>
-            <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone"></a>
+        <div class ="nome">
+            <h5> <?php echo $_SESSION['nomeAluno']?></h5>
+            <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
+            <a href="?encerrarSessao()=1"><img src="photos\logout.png" alt="logout"></a>
         </div>
         
     </header> 
