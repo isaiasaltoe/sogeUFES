@@ -33,7 +33,6 @@
             session_start();
             if (!isset($_SESSION['codMatricula'])) {
                 header("?msgErro=Faça login primeiro.");
-              exit();
             }else{
                 $nomeAluno = $_SESSION['nomeAluno'] ?? $_GET['nome'] ?? 'Usuário';
                 $emailAluno = $_SESSION['emailAluno'] ?? $_GET['email'] ?? 'E-mail não disponível';

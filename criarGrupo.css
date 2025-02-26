@@ -91,7 +91,7 @@ body, html {
     background-image: url(photos/Bookopen.png);
     background-repeat: no-repeat;
     background-position: 10px center;
-    text-indent: 5.181347150259067vh;
+    text-indent: 5.581347150259067vh;
     height: 6vh;
     width: 35vw;
     margin-bottom: 3vh;
@@ -104,7 +104,7 @@ body, html {
     background-image: url(photos/Clock.png);
     background-repeat: no-repeat;
     background-position: 10px center;
-    text-indent: 5.181347150259067vh;
+    text-indent: 2.98vh;
     height: 6vh;
     width: 35vw;
     margin-bottom: 3vh;
@@ -115,7 +115,7 @@ body, html {
     background-image: url(photos/Calendar.png);
     background-repeat: no-repeat;
     background-position: 10px center;
-    text-indent: 5.181347150259067vh;
+    text-indent: 2.5vh;
     height: 6vh;
     width: 35vw;
     margin-bottom: 3vh;
@@ -141,11 +141,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .sala input{
-    background-size: 24px 24px;
+    background-size: 4.974093264248705vh;
     background-image: url(photos/Home.png);
     background-repeat: no-repeat;
     background-position: 10px center;
-    text-indent: 40px;
+    text-indent: 5.181347150259067vh;
     height: 6vh;
     width: 35vw;
     margin-bottom: 3vh;
