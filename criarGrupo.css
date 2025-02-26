@@ -1,8 +1,9 @@
 
 body, html {
-    overflow: hidden;
+    overflow: auto;
     height: 100%; 
     width: 100%;
+
     }
     
 .container_criarGrupo{
@@ -15,6 +16,7 @@ body, html {
     align-items: center;
     min-height: 100vh;
     padding-bottom: 1vh;
+   
    
 }
 
@@ -37,6 +39,7 @@ body, html {
     width: 100%;
     align-items: center;
     max-width:500px ;
+  
 }
 
 
@@ -137,6 +140,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-bottom: 3vh;
 }
 
+.sala input{
+    background-size: 24px 24px;
+    background-image: url(photos/Home.png);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    text-indent: 40px;
+    height: 6vh;
+    width: 35vw;
+    margin-bottom: 3vh;
+}
+
 .descricao input{
     background-size: 4.974093264248705vh;
     background-image: url(photos/Bookopen.png);
@@ -146,4 +160,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height: 6vh;
     width: 35vw;
     margin-bottom: 3vh;
+}
+
+.agenda {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.agenda div{
+    width: 50%;
 }

@@ -1,17 +1,19 @@
 <?php
 
-function iniciarSessao($codMatricula, $nomeAluno) {
+function novaSessao($codMatricula, $nomeAluno) {
     session_start();
     $_SESSION['codMatricula'] = $codMatricula;
     $_SESSION['nomeAluno'] = $nomeAluno;
+   
 }
+
 
 
 function verificarSessao() {
     session_start();
-    
-    if (!isset($_SESSION['codMatricula'])) {
-    
+    $codMatricula = $_SESSION['codMatricula'];
+    if (!($codMatricula)) {
+     
         header("Location: login.php");
         exit();
     }
