@@ -39,7 +39,7 @@ function iniciarSessao($codMatricula, $senhaAluno) {
     }
 }
 
-// Verifica se houve envio de formulário e inicia a sessão
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['codMatricula']) && isset($_POST['senhaAluno'])) {
     iniciarSessao($_POST['codMatricula'], $_POST['senhaAluno']);
 } else {

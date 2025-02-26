@@ -90,15 +90,18 @@ body{
 }
 
 .livrofechado input{
+    background-size: 4.974093264248705vh;
     background-image: url(photos/Book.png);
     background-repeat: no-repeat;
     background-position: left;
     height: 7.357512953367876vh;
     width: 35.208333333333336vw;
     margin-bottom: 4.248704663212435vh;
+    
 }
 
 .cadeado input{
+    background-size: 4.974093264248705vh;
     background-image: url(photos/Lock.png);
     background-repeat: no-repeat;
     background-position: left;
@@ -109,6 +112,7 @@ body{
 }
 
 .icone input{
+    background-size: 4.974093264248705vh;
     background-image: url(photos/icone.png);
     background-repeat: no-repeat;
     background-position: left;
@@ -119,6 +123,7 @@ body{
 }
 
 .email input{
+    background-size: 4.974093264248705vh;
     background-image: url(photos/mail.png);
     background-repeat: no-repeat;
     background-position: left;
@@ -138,18 +143,3 @@ body{
 
 }
 
-.cadeado input:not(:placeholder-shown)  {
-    background-image: none;
-}
-
-.livrofechado input:not(:placeholder-shown)  {
-    background-image: none;
-}
-
-.email input:not(:placeholder-shown)  {
-    background-image: none;
-}
-
-.icone input:not(:placeholder-shown)  {
-    background-image: none;
-}
