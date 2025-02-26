@@ -24,20 +24,28 @@
             <h3>Sistema de Organização <br>de Grupo de Estudos da UFES </h3>
         </div>
 
-        <?php
-            session_start();
-
-            require_once 'Sessao.php';
-
-            if(isset($_GET['logout'])){
-                encerrarSessao();
-            }
-        ?>
-
         <div class ="nome">
-            <h5> <?php echo $_SESSION['nomeAluno']?></h5>
-            <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
-            <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>
+            
+            <?php 
+               
+               require_once 'Sessao.php';
+                  $varsessao = false;
+                if(verificarIndex()){
+                    $varsessao = true;
+                    if(isset($_GET['logout'])){
+                        encerrarSessao();
+                    }
+                    echo '<h5> '. $_SESSION['nomeAluno'].'</h5>
+                        <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
+                        <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>';
+
+
+
+                } 
+                  else{
+                    echo'<a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>';
+                  }
+            ?>
         </div>
         
     </header> 
@@ -66,12 +74,26 @@
                 </p>
                 
                 <div class="botoes">
-                <a href="https://localhost/sogeufes/salas.php?mat=<?php echo urlencode($_SESSION['codMatricula']); ?>">
+                <a href="<?php
+                    if($varsessao){
+                        echo 'https://localhost/sogeufes/salas.php?mat='. urlencode($_SESSION['codMatricula']).'';  
+                    } 
+                    else{
+                        echo 'https://localhost/sogeufes/login.php';
+                    }
+                    ?>">
                         <button>Procurar grupos</button>
                     </a>
                     <button>Baixar aplicativo mobile</button>
 
-                    <a href="https://localhost/sogeufes/criarGrupo.php?mat=<?php echo urlencode($_SESSION['codMatricula']); ?>">
+                    <a href="<?php
+                    if($varsessao){
+                        echo 'https://localhost/sogeufes/criarGrupo.php?mat='. urlencode($_SESSION['codMatricula']).'';  
+                    } 
+                    else{
+                        echo 'https://localhost/sogeufes/login.php';
+                    }
+                    ?>">
 
                         <button>Criar grupo</button>
                     </a>
