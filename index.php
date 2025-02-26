@@ -18,11 +18,65 @@
             <h1>sogeUFES</h1> 
             <img src="5402751 2.png" alt="livro">
         </div>
+<<<<<<< Updated upstream
         <h3>Sistema de Organização <br>de Grupo de Estudos da UFES </h3>
     </header> 
     <div class ="container">
         <div class="branco">
             <div class="imagem">
+=======
+        <?php
+            session_start();
+
+            require_once 'Sessao.php';
+
+            if(isset($_GET['logout'])){
+                encerrarSessao();
+            }
+        ?>
+
+        <div class ="nome">
+            <h5> <?php echo $_SESSION['nomeAluno']?></h5>
+            <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
+            <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>
+        </div>
+        
+    </header> 
+    <div class ="container">
+        <?php
+            //session_start();
+            if (!isset($_SESSION['codMatricula'])) {
+                header("?msgErro=Faça login primeiro.");
+            }else{
+                $nomeAluno = $_SESSION['nomeAluno'] ?? $_GET['nome'] ?? 'Usuário';
+                $emailAluno = $_SESSION['emailAluno'] ?? $_GET['email'] ?? 'E-mail não disponível';
+
+            }
+            
+          
+        ?>
+
+        <div class="branco">
+            <div class="imagem"></div>
+            <div class="conteudo">
+                <h1>Como funciona o sogeUFES</h1>
+                <h2>Simplicidade e eficiência</h2>
+                <p>
+                O aplicativo de Grupos de Estudo da UFES foi criado para facilitar a formação de grupos acadêmicos, promovendo colaboração e aprendizado entre os estudantes. Com ele, é possível criar salas de estudo para disciplinas ou projetos, escolhendo entre as salas do prédio que já foram dedicadas exclusivamente a este projeto. Além disso, os estudantes podem encontrar facilmente salas de estudo já criadas por outros, organizadas por curso, disciplina ou interesse. Cada sala inclui informações importantes, como horário, disciplina, número de participantes e recursos disponíveis, proporcionando uma organização simples e eficiente. O aplicativo garante que os estudantes sempre tenham um espaço apropriado para estudar, colaborar e trocar conhecimentos, otimizando o uso das salas já alocadas para esse fim.
+                </p>
+                
+                <div class="botoes">
+                <a href="https://localhost/sogeufes/salas.php?mat=<?php echo urlencode($_SESSION['codMatricula']); ?>">
+                        <button>Procurar grupos</button>
+                    </a>
+                    <button>Baixar aplicativo mobile</button>
+                    <a href="https://localhost/sogeufes/criarGrupo.php?mat=<?php echo urlencode($_SESSION['codMatricula']); ?>">
+                        <button>Criar grupo</button>
+                    </a>
+                    
+                </div>
+            </div>
+>>>>>>> Stashed changes
             </div>
             <div class="conteudo"></div>
         </div>
