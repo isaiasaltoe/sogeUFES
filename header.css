@@ -84,6 +84,7 @@ html,body{
     display: flex;
 }
 
+
 .nome{
     display:flex;
     align-items: center;
@@ -97,6 +98,7 @@ html,body{
 .nome a{
     display:flex;
     align-items: center;
+    margin-right: 0px;
 }
 
 .nome h5{
