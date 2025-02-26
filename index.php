@@ -24,33 +24,6 @@
             <h3>Sistema de Organização <br>de Grupo de Estudos da UFES </h3>
         </div>
 
-        <h3>Sistema de Organização <br>de Grupo de Estudos da UFES </h3>
-
-        <div class ="nome">
-            <h5> <?php echo $_SESSION['nomeAluno']?></h5>
-            <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
-            <a href="?encerrarSessao()=1"><img src="photos\logout.png" alt="logout"></a>
-        </div>
-        
-    </header> 
-    <div class ="container">
-        <?php
-            session_start();
-            if (!isset($_SESSION['codMatricula'])) {
-                header("?msgErro=Faça login primeiro.");
-            }else{
-                $nomeAluno = $_SESSION['nomeAluno'] ?? $_GET['nome'] ?? 'Usuário';
-                $emailAluno = $_SESSION['emailAluno'] ?? $_GET['email'] ?? 'E-mail não disponível';
-
-            }
-            
-          
-        ?>
-
-        <div class="branco">
-
-            <div class="imagem">
-
         <?php
             session_start();
 

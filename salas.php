@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -24,7 +22,7 @@
             </div>
             <h3>Sistema de Organização <br>de Grupo de Estudos da UFES</h3>
         </div>
-<<<<<<< HEAD
+
         
         <?php 
              require_once 'Sessao.php';
@@ -39,10 +37,7 @@
             <h5> <?php echo $_SESSION['nomeAluno']?></h5>
             <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
             <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>
-=======
-        <div>
-            <a href="http://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone"></a>
->>>>>>> 1eccffa8a79d75a074bcc7b54e9ac885b5e52698
+
         </div>
     </header>
 
@@ -53,12 +48,9 @@
             <div class="salas">  
             <?php 
                 
-<<<<<<< HEAD
+
                 
-=======
-                require_once 'Sessao.php';
-                verificarSessao();
->>>>>>> 1eccffa8a79d75a074bcc7b54e9ac885b5e52698
+
                 require_once 'conectaBD.php';
 
                
@@ -80,21 +72,18 @@
                   foreach ($grupos as $grupo):
                    
                    
-<<<<<<< HEAD
-                    echo '<div action = "visualizarGrupo.php" class="sala" id ='.$grupo['idgrupoestudo'].'>
-=======
+
+
                     echo '<a href = "criarsala.php?id='.$grupo['idgrupoestudo'].'" class="sala" id ='.$grupo['idgrupoestudo'].'>
->>>>>>> 1eccffa8a79d75a074bcc7b54e9ac885b5e52698
+
                             <h3>' . $grupo['nomedisciplina'] . '</h3>
                             <p>' . $grupo['salalugar'] . ', ' . $grupo['prediolugar'] . '</p>
                             <p>' . $grupo['qtdvagas'] . ' vagas totais</p>
                             <p>' . $grupo['horainicio'] . ' - ' . $grupo['horatermino'] . '</p>
                             <p>'.$grupo['datahorario'].'</p>
-<<<<<<< HEAD
-                    </div>';
-=======
+
                     </a>';
->>>>>>> 1eccffa8a79d75a074bcc7b54e9ac885b5e52698
+
                  
                endforeach
 
