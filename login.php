@@ -23,9 +23,10 @@ function iniciarSessao($codMatricula, $senhaAluno) {
         if ($stmt->rowCount() == 1) {
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             novaSessao($result['codmatricula'], $result['nomealuno']);
-                
+               
             // Redirecionar para a página inicial
-            header("Location: index.php?mat=" . urlencode($result['codMatricula']));
+            header("Location: index.php?mat=" . urlencode($result['codmatricula']));
+             
             exit();
             
         } else {
