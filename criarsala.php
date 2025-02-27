@@ -77,29 +77,29 @@ if (isset($_POST['excluir'])) {
     </header>
 
     
-    <h2 class="nomedisciplina">{disciplina.nome}</h2>
+<h2 class="nomedisciplina">Cálculo C</h2>
+
+<div class="container_sala">
+    <div class="container_esquerda">  
+        <input type="text" placeholder="Criador do grupo:">
+        <input type="text" placeholder="Horário:">
+        <input type="text" placeholder="Local:">
+        <input type="text" placeholder="Data:">
+    </div>
+    <div class="container_direita">
+        <input type="text" placeholder="Descrição:" style="height: 29.1vh;">
+        <input type="text" placeholder="Número de Vagas:">
+    </div>
+</div>
+</div>
+<div class="botoes">
+    <button type="submit" class="botao" style="margin-left: 7.949790794979079vw;">Editar Grupo</button>
+    <button type="button" class="botao">Entrar no Grupo</button>
+    <div class ="vermelho">
+        <button type="button" class="botao">Excluir Grupo</button>
+    </div>
+</div>
     
-    <div class="container">  
-            <div class="formulario">
-                <div class="info-container">  <!-- Quadrado ao redor -->
-                    <div class="formulario-esquerda">
-                        <div class="info1">Criador do Grupo: <a>{?}</a></div>
-                        <div class="info2">Horário: <a>{horario.horaInicio} - {horario.horaFim}</a></div>
-                        <div class="info3">Local: <a>{lugar.nomeLocal}</a></div>
-                        <div class="info4">Data: <a>{horario.diaSemana}</a></div>
-                    </div>
-                    <div class="formulario-direita">
-                        <div class="info5">Descrição: <a>{lugar.descricaoLocal}</a></div>
-                        <div class="info6">Número de Vagas: <a>{grupoEstudo.qtdvagas}</a></div>
-                    </div>
-                </div>
-            </div>
-                <div class="botoes">
-                    <button type="submit" class="botao">Editar Grupo</button>
-                    <button type="button" class="botao">Criar Grupo</button>
-                    <button type="button" class="botao">Excluir Grupo</button>
-                </div>
-            </div>
     
     </div>      
 </body>
