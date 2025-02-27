@@ -1,78 +1,80 @@
+.container_sala{
+    display: flex;
+    background-color: #EFF6FF;
+    width: 100%;
+    top: 0%;
+    height: 100%;  
+}
+
+.container_esquerda input{
+    background-color: white;
+    width: 46.35564853556485vw;
+    height: 7.1vh;
+    border:none;
+    margin-left: 4.131799163179917vw;
+    margin-bottom: 3.9vh;
+    margin-right: 3.8702928870292888vw;
+    font-size:2.1354166666666665vw;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    
+}
+
+.container_direita input{
+    display: flex;
+    background-color: white;
+    width: 39.35564853556485vw;
+    height: 7.1vh;
+    border:none;
+    margin-right: 4.131799163179917vw;
+    margin-bottom: 3.9vh;
+    font-size:2.1354166666666665vw;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    
+    
+}
 
 .nomedisciplina{
-    font-size: 1.25vw;
-    font-weight: 600;
-    color: #1E1E1E;
-    margin-left: 400px;
-    margin-top: 100px;
+    display:flex;
+    font-size: 3.3472803347280333vw;
+    font-weight: 400;
+    color:black;
+    justify-content: left;
+    margin-left: 7.9vh;
+    margin-top: 13vh;
 }
 
 .botoes button{
-    font-size: 0.729vw;
+    font-size: 2.5vh;
     background-color: #3B82F6;
     color:white;
-    height: 300px;
-    height: 50px;
-    margin-right: 230px;
+    height: 5.8vh;
+    width: 14.161087866108787vw;
     align-items: center;
     border-radius: 30px;
     border: none;
     font-family: inherit;
+    font-weight: 700;
+    margin-right: 7.949790794979079vw;
 }
 
 .botoes {
     display: flex;
     justify-content: space-between;
-    margin-top: 400px;
-
-}
-.info1, .info2, .info3, .info4, .info5, .info6 {
-    padding: 1px;
-    border-radius: 1px;
-    background-color: #ffffff;
+    
 }
 
-.info1 {
-    position: absolute; /* ou fixed, dependendo do contexto */
-    top: 366px;
-    left: 400px;
-    width: 450px;
-    height: 71px;
-}
-.info2 {
-    position: absolute; /* ou fixed, dependendo do contexto */
-    top: 476px;
-    left: 400px;
-    width: 450px;
-    height: 71px;
-}
-.info3 {
-    position: absolute; /* ou fixed, dependendo do contexto */
-    top: 586px;
-    left: 400px;
-    width: 450px;
-    height: 71px;
-}
-.info4 {
-    position: absolute; /* ou fixed, dependendo do contexto */
-    top: 696px;
-    left: 400px;
-    width: 450px;
-    height: 71px;
+.vermelho button{
+    background-color:#EC585B;
 }
 
-.info5 {
-    position: absolute; /* ou fixed, dependendo do contexto */
-    top: 366px;
-    right: 450px;
-    width: 536px;
-    height: 291px;
+.container_geral{
+    display: flex;
+    flex-direction: column;
+    background-color: #EFF6FF;
+    width: 100%;
+    top: 0%;
+    height: 100%;  
 }
 
-.info6{
-    position: absolute; /* ou fixed, dependendo do contexto */
-    top: 696px;
-    right: 450px;
-    width: 536px;
-    height: 71px;
-}
