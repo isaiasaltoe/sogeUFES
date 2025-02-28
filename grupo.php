@@ -94,17 +94,17 @@
 
         
     <h1> <?php echo  $grupo['nomedisciplina']; ?></h1>
-
+<form action= "" method="POST">
     <div class="container_sala">
         <div class="container_esquerda">  
-            <input type="text" value="<?php echo $grupo['criador']; ?>"disabled>
-            <input type="text" value="<?php echo $grupo['horainicio']; ?>"disabled>
-            <input type="text" value="<?php echo $grupo['datahorario']; ?>"disabled>
-            <input type="text" value="<?php echo $grupo['prediolugar'] . ', ' . $grupo['salalugar']; ?>" disabled>
+            <input type="text" value="<?php echo $grupo['criador']; ?>"disabled> 
+            <input type="time" value="<?php echo $grupo['horainicio']; ?>"<?php if(!isset($_GET['edit'])){echo'disabled';}?>>
+            <input type="date" value="<?php echo $grupo['datahorario']; ?>"<?php if(!isset($_GET['edit'])){echo'disabled';}?>>
+            <input type="text" value="<?php echo $grupo['prediolugar'] . ', ' . $grupo['salalugar']; ?>" <?php if(!isset($_GET['edit'])){echo'disabled';}?>>
 
         </div>
         <div class="container_direita">
-        <textarea disabled style="height: 29.1vh;"><?php echo htmlspecialchars($grupo['descricao']); ?></textarea>
+        <textarea <?php if(!isset($_GET['edit'])){echo'disabled';}?> style="height: 29.1vh;"><?php echo htmlspecialchars($grupo['descricao']); ?></textarea>
 
 
         <input type="text" value="<?php echo $grupo['qtdvagas' ] - $grupo['count']; ?>" disabled>
@@ -114,7 +114,42 @@
     <div class="botoes">
 
     <?php if($criador): 
-        
+        if(isset($_GET['edit'])){
+            if ($criador && $_SERVER["REQUEST_METHOD"] === "POST") {
+                $novoHorario = $_POST['horario'];
+                $novaData = $_POST['data'];
+                list($predio, $sala) = array_map('trim', explode(',', $_POST['lugar']));
+                $novaDescricao = $_POST['descricao'];
+            
+                $sqlUpdate = "UPDATE agenda ag
+                JOIN lugar l ON ag.idlugar = l.idlugar
+                JOIN horario h ON ag.idhorario = h.idhorario
+                JOIN grupoEstudo ge ON ge.idgrupoestudo = ag.idgrupoestudo
+                SET h.horainicio = :horario, 
+                    h.datahorario = :data, 
+                    l.prediolugar = :predio, 
+                    l.salalugar = :sala, 
+                    ge.descricao = :descricao
+                WHERE ag.idgrupoestudo = :idgrupoestudo";
+
+                    $stmtUpdate = $pdo->prepare($sqlUpdate);
+                    $stmtUpdate->execute([
+                        ':horario' => $novoHorario,
+                        ':data' => $novaData,
+                        ':predio' => $predio,
+                        ':sala' => $sala,
+                        ':descricao' => $novaDescricao,
+                        ':idgrupoestudo' => $idgrupoestudo
+                    ]);
+
+            header("Location: grupos.php?id=$idgrupoestudo");
+            exit;
+}
+
+
+        }
+
+
         if(isset($_GET['delete'])){
             // Verifique se o parâmetro 'insert' está presente na URL
             $idgrupoestudo = $_GET['id'];
@@ -133,17 +168,30 @@
         ?>
         
         
-        <a>
-            <button type="button" class="botao" style="margin-left: 7.949790794979079vw;">Editar Grupo</button>
-        </a>
+        
+            
+        <?php 
+        if(!isset($_GET['edit'])){
+            echo '  <a href="?id='.$_GET["id"].'&edit=1">
+                        <button type="button" class="botao" style="margin-left: 7.949790794979079vw;">Editar Grupo</button>
+                    </a> 
+                    <a href="?id='. $_GET["id"].'&delete=1">
+                        <button type="button" class="botao">Excluir Grupo</button>
+                    </a>';
 
+                    
+        }   
+        else{
+            echo '<button type="submit" class="botao" style="margin-left: 7.949790794979079vw;">Confirmar Edição</button>';
 
-        <a href="?id=<?php echo $_GET['id']; ?>&delete=1">
-            <button type="button" class="botao">Excluir Grupo</button>
-        </a>
+            }
+        ?>
+     
 
+     
 
     <?php endif;?> 
+    </form>
 
     <?php
     if(!$japarticipa): 
