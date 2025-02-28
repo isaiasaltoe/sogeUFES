@@ -78,3 +78,13 @@
     height: 100%;  
 }
 
+h1{
+    display:flex;
+    font-size: 3.3472803347280333vw;
+    font-weight: 400;
+    color:black;
+    justify-content: left;
+    margin-left: 4vw;
+    margin-top: 7vh;
+}
+
