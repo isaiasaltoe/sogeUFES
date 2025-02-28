@@ -12,6 +12,7 @@ function novaSessao($codMatricula, $nomeAluno) {
 function verificarSessao() {
     session_start();
     $codMatricula = $_SESSION['codMatricula'];
+    
     if (!($codMatricula)) {
      
         header("Location: login.php");

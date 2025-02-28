@@ -20,7 +20,7 @@
     
 }
 
-.container_direita input{
+.container_direita input,textarea{
     display: flex;
     background-color: white;
     width: 39.35564853556485vw;
@@ -33,6 +33,11 @@
     font-weight: 400;
     
     
+}
+/* nao mexam leigos (isaias)hahah*/
+textarea {
+
+    resize: none; /* Impede redimensionamento */
 }
 
 .nomedisciplina{
