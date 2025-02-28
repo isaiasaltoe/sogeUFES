@@ -1,0 +1,90 @@
+.container_sala{
+    display: flex;
+    background-color: #EFF6FF;
+    width: 100%;
+    top: 0%;
+    height: 100%;  
+}
+
+.container_esquerda input{
+    background-color: white;
+    width: 46.35564853556485vw;
+    height: 7.1vh;
+    border:none;
+    margin-left: 4.131799163179917vw;
+    margin-bottom: 3.9vh;
+    margin-right: 3.8702928870292888vw;
+    font-size:2.1354166666666665vw;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    
+}
+
+.container_direita input{
+    display: flex;
+    background-color: white;
+    width: 39.35564853556485vw;
+    height: 7.1vh;
+    border:none;
+    margin-right: 4.131799163179917vw;
+    margin-bottom: 3.9vh;
+    font-size:2.1354166666666665vw;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    
+    
+}
+
+.nomedisciplina{
+    display:flex;
+    font-size: 3.3472803347280333vw;
+    font-weight: 400;
+    color:black;
+    justify-content: left;
+    margin-left: 7.9vh;
+    margin-top: 13vh;
+}
+
+.botoes button{
+    font-size: 2.5vh;
+    background-color: #3B82F6;
+    color:white;
+    height: 5.8vh;
+    width: 14.161087866108787vw;
+    align-items: center;
+    border-radius: 30px;
+    border: none;
+    font-family: inherit;
+    font-weight: 700;
+    margin-right: 7.949790794979079vw;
+}
+
+.botoes {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.vermelho button{
+    background-color:#EC585B;
+}
+
+.container_geral{
+    display: flex;
+    flex-direction: column;
+    background-color: #EFF6FF;
+    width: 100%;
+    top: 0%;
+    height: 100%;  
+}
+
+h1{
+    display:flex;
+    font-size: 3.3472803347280333vw;
+    font-weight: 400;
+    color:black;
+    justify-content: left;
+    margin-left: 4vw;
+    margin-top: 7vh;
+}
+

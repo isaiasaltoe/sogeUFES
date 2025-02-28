@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ]);
             $idHorario = $stmtHorario->fetchColumn();
         }
-            // Verifica se já existe um grupo de estudo no mesmo local, data e horário
+            
         $stmtVerificaGrupo = $pdo->prepare("
         SELECT agenda.idGrupoEstudo
         FROM agenda
@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':grupo' => $idGrupoEstudo
         ]);
 
-   
+        
         $data = date('Y-m-d H:i:s');
         $sqlParticipacao = "INSERT INTO participacao (dataEntrada, situacao, codMatricula, idGrupoEstudo)
                             VALUES (:dataEntrada, 'ativo', :codMatricula, :idGrupoEstudo)";
@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $pdo->commit();
 
-        header("Location: criarsala.html?mat=" . urlencode($codMatricula));
+        header("Location: exibirGrupo.php?id=" . urlencode($idGrupoEstudo));
         exit();
     } catch (Exception $e) {
         $pdo->rollBack();

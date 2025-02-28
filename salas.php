@@ -74,7 +74,7 @@
                    
 
 
-                    echo '<a href = "criarsala.php?id='.$grupo['idgrupoestudo'].'" class="sala" id ='.$grupo['idgrupoestudo'].'>
+                    echo '<a href = "exibirGrupo.php?id='.$grupo['idgrupoestudo'].'" class="sala" id ='.$grupo['idgrupoestudo'].'>
 
                             <h3>' . $grupo['nomedisciplina'] . '</h3>
                             <p>' . $grupo['salalugar'] . ', ' . $grupo['prediolugar'] . '</p>
