@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $pdo->commit();
 
-        header("Location: exibirGrupo.php?id=" . urlencode($idGrupoEstudo));
+        header("Location: grupo.php?id=" . urlencode($idGrupoEstudo));
         exit();
     } catch (Exception $e) {
         $pdo->rollBack();

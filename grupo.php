@@ -27,7 +27,7 @@
         $grupo = $stmt->fetch(PDO::FETCH_ASSOC);
     }
       
-      var_dump($grupo);
+    
      
    
     if (!$grupo) {
@@ -64,7 +64,7 @@
         
         
         <link href="header.css" rel="stylesheet">
-        <link href="exibirGrupo.css" rel="stylesheet">
+        <link href="grupo.css" rel="stylesheet">
     </head>
     <body>
     <header class="header">
@@ -113,17 +113,44 @@
     <div class="botoes">
 
     <?php if($criador): ?>
-        <a href="editarGrupo.php?id=<?php echo $grupo['idgrupoestudo']; ?>" >
+        <a>
             <button type="button" class="botao" style="margin-left: 7.949790794979079vw;">Editar Grupo</button>
         </a>
     <?php endif;?> 
 
-    <?php if(!$japarticipa):?>
-        
-        <?php $sql = "INSERT INTO grupoestudo"        ?>
-        <button type="button" class="botao">Entrar no Grupo</button>
-        </a>
-        <?php endif; ?>
+    <?php
+    if(!$japarticipa): 
+        if(isset($_GET['insert'])){
+            // Verifique se o parâmetro 'insert' está presente na URL
+            $idgrupoestudo = $_GET['id'];
+
+           
+            $data = date('Y-m-d H:i:s');  
+            $codMatricula = $_SESSION['codMatricula'];  
+
+       
+            $sql = "INSERT INTO participacao (dataEntrada, situacao, codMatricula, idGrupoEstudo)
+                    VALUES (:dataEntrada, 'ativo', :codMatricula, :idGrupoEstudo)";
+            $stmtParticipacao = $pdo->prepare($sql);
+            $stmtParticipacao->execute([
+                ':dataEntrada' => $data,
+                ':codMatricula' => $codMatricula,
+                ':idGrupoEstudo' => $idgrupoestudo
+            ]);
+
+            
+            header("Location: ?id=$idgrupoestudo");
+            exit;
+        }
+?>
+
+
+      <a href="?id=<?php echo $_GET['id']; ?>&insert=1">
+      <button type="button" class="botao">Entrar no Grupo</button>
+      </a>
+
+<?php endif; ?>
+
         
     </div>
         </div>      
