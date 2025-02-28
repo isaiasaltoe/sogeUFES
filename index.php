@@ -76,7 +76,7 @@
                 <div class="botoes">
                 <a href="<?php
                     if($varsessao){
-                        echo 'https://localhost/sogeufes/salas.php?mat='. urlencode($_SESSION['codMatricula']).'';  
+                        echo 'https://localhost/sogeufes/grupos.php?mat='. urlencode($_SESSION['codMatricula']).'';  
                     } 
                     else{
                         echo 'https://localhost/sogeufes/login.php';

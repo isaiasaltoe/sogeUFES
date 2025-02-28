@@ -104,7 +104,8 @@
 
         </div>
         <div class="container_direita">
-    <textarea disabled style="height: 29.1vh;"><?php echo htmlspecialchars($grupo['descricao']); ?></textarea>
+        <textarea disabled style="height: 29.1vh;"><?php echo htmlspecialchars($grupo['descricao']); ?></textarea>
+
 
         <input type="text" value="<?php echo $grupo['qtdvagas' ] - $grupo['count']; ?>" disabled>
         </div>
@@ -112,10 +113,36 @@
     </div>
     <div class="botoes">
 
-    <?php if($criador): ?>
+    <?php if($criador): 
+        
+        if(isset($_GET['delete'])){
+            // Verifique se o parâmetro 'insert' está presente na URL
+            $idgrupoestudo = $_GET['id'];
+
+            $sql = "DELETE FROM grupoestudo WHERE idgrupoestudo = :idGrupoEstudo";
+            $stmtParticipacao = $pdo->prepare($sql);
+            $stmtParticipacao->execute([
+                ':idGrupoEstudo' => $idgrupoestudo
+            ]);
+
+            
+            header("Location:grupos.php?mat=" . urlencode($_SESSION['codMatricula']));
+            exit;
+        }
+
+        ?>
+        
+        
         <a>
             <button type="button" class="botao" style="margin-left: 7.949790794979079vw;">Editar Grupo</button>
         </a>
+
+
+        <a href="?id=<?php echo $_GET['id']; ?>&delete=1">
+            <button type="button" class="botao">Excluir Grupo</button>
+        </a>
+
+
     <?php endif;?> 
 
     <?php
@@ -139,7 +166,7 @@
             ]);
 
             
-            header("Location: ?id=$idgrupoestudo");
+            header("Location:index.php ?id=$idgrupoestudo");
             exit;
         }
 ?>
