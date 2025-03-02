@@ -100,6 +100,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ]);
     $grupoExistente = $stmtVerificaGrupo->fetchColumn();
 
+    $dataAtual = date('Y-m-d');
+    if ($horarioData < $dataAtual) {
+        echo "Erro: Erro ao escolher dia ";
+        $pdo->rollBack();
+        header("Location: criarGrupo.php?msgErro=falha");
+        exit();
+    }   
+
+
     if ($grupoExistente) {
         echo "Erro: Já existe um grupo de estudo agendado para este horário e local.";
         $pdo->rollBack();
