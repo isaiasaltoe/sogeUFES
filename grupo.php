@@ -75,10 +75,11 @@
                 </div>
                 <h3>Sistema de Organização <br>de Grupo de Estudos da UFES</h3>
             </div>
-            
-            <?php 
-                
-            
+            <?php
+                session_start();
+
+                require_once 'Sessao.php';
+
                 if(isset($_GET['logout'])){
                     encerrarSessao();
                 }
@@ -176,7 +177,7 @@
                         <button type="button" class="botao" style="margin-left: 7.949790794979079vw;">Editar Grupo</button>
                     </a> 
                     <a href="?id='. $_GET["id"].'&delete=1">
-                        <button type="button" class="botao">Excluir Grupo</button>
+                        <button type="button" class="botao" style="background-color:#EC585B;">Excluir Grupo</button>
                     </a>';
 
                     
