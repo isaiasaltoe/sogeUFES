@@ -29,11 +29,11 @@
       
     
      
-   
+    /*
     if (!$grupo) {
         die("Grupo não encontrado.");
     }
-    
+    */
 
      $criador = $_SESSION['codMatricula'] == $grupo['aluno_idcriadorgrupo'];
      
@@ -75,20 +75,20 @@
                 </div>
                 <h3>Sistema de Organização <br>de Grupo de Estudos da UFES</h3>
             </div>
-            
-            <?php 
-                
-            
-                if(isset($_GET['logout'])){
-                    encerrarSessao();
-                }
-            ?>
+            <?php
 
-            <div class ="nome">
-                <h5> <?php echo $_SESSION['nomeAluno']?></h5>
-                <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
-                <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>
-            </div>
+            require_once 'Sessao.php';
+
+            if(isset($_GET['logout'])){
+                encerrarSessao();
+            }
+        ?>
+
+        <div class ="nome">
+            <h5> <?php echo $_SESSION['nomeAluno']?></h5>
+            <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
+            <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>
+        </div>
 
         </header>
 
@@ -176,7 +176,7 @@
                         <button type="button" class="botao" style="margin-left: 7.949790794979079vw;">Editar Grupo</button>
                     </a> 
                     <a href="?id='. $_GET["id"].'&delete=1">
-                        <button type="button" class="botao">Excluir Grupo</button>
+                        <button type="button" class="botao" style="background-color:#EC585B;">Excluir Grupo</button>
                     </a>';
 
                     
