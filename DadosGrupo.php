@@ -108,6 +108,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }   
 
+    $horaAtual = date("H:i");
+    if ($horarioHora < $horaAtual){
+        echo "Erro: Erro ao escolher hora";
+        $pdo->rollBack();
+        header("Location: criarGrupo.php?msgErro=falha");
+        exit();
+    }
+
+
 
     if ($grupoExistente) {
         echo "Erro: Já existe um grupo de estudo agendado para este horário e local.";

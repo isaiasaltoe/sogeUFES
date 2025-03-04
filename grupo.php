@@ -29,11 +29,11 @@
       
     
      
-   
+    /*
     if (!$grupo) {
         die("Grupo não encontrado.");
     }
-    
+    */
 
      $criador = $_SESSION['codMatricula'] == $grupo['aluno_idcriadorgrupo'];
      
@@ -76,20 +76,19 @@
                 <h3>Sistema de Organização <br>de Grupo de Estudos da UFES</h3>
             </div>
             <?php
-                session_start();
 
-                require_once 'Sessao.php';
+            require_once 'Sessao.php';
 
-                if(isset($_GET['logout'])){
-                    encerrarSessao();
-                }
-            ?>
+            if(isset($_GET['logout'])){
+                encerrarSessao();
+            }
+        ?>
 
-            <div class ="nome">
-                <h5> <?php echo $_SESSION['nomeAluno']?></h5>
-                <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
-                <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>
-            </div>
+        <div class ="nome">
+            <h5> <?php echo $_SESSION['nomeAluno']?></h5>
+            <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
+            <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>
+        </div>
 
         </header>
 
