@@ -41,12 +41,14 @@
 
     <div class="container">
         <div class="branco">
-            <h2>Grupos com vagas disponíveis</h2>
-            <p>Escolha um grupo de estudo</p>
+            <h2>Meus grupos</h2>
+           
             <div class="salas">  
                 <?php 
-                    require_once 'conectaBD.php';
 
+                  $codmatricula = (int)$_SESSION['codMatricula'];
+                    require_once 'conectaBD.php';
+                      //var_dump($_SESSION['codMatricula']);
                     $sql =  "SELECT TO_CHAR(ho.dataHorario, 'DD/MM/YYYY') AS dataHorario, ge.idgrupoestudo,  di.nomedisciplina, ho.horaInicio,lu.salaLugar,lu.predioLugar,ge.qtdvagas, 
                             (ho.horaInicio + INTERVAL '2 HOURS') AS horaTermino, 
                             COUNT(pa.codmatricula) AS count
@@ -56,10 +58,13 @@
                         JOIN lugar AS lu ON lu.idLugar = ag.idLugar
                         JOIN disciplina AS di ON di.iddisciplina = ge.iddisciplina
                         LEFT JOIN participacao AS pa ON pa.idGrupoEstudo = ge.idGrupoEstudo AND pa.situacao = 'ativo' 
+                        WHERE pa.codMatricula = :codMatricula 
                         GROUP BY ge.idgrupoestudo, di.nomedisciplina, ho.horaInicio, lu.salaLugar, lu.predioLugar, ge.qtdvagas, ho.dataHorario";
 
-                    $query = $pdo->prepare($sql); 
-                    $query->execute();
+                    $query = $pdo->prepare($sql);  
+                    $query->execute([
+                        ':codMatricula'=> $codmatricula
+                    ]);
                     $grupos = $query->fetchAll(PDO::FETCH_ASSOC);
 
                     if(!$grupos){
@@ -72,7 +77,7 @@
                     <a href="grupo.php?id=<?php echo $grupo['idgrupoestudo']; ?>" class="sala" id="<?php echo $grupo['idgrupoestudo']; ?>">
                         <h3><?php echo $grupo['nomedisciplina']; ?></h3>
                         <p><?php echo $grupo['salalugar']; ?>, <?php echo $grupo['prediolugar']; ?></p>
-                        <p><?php echo $grupo['qtdvagas'] - $grupo['count']; ?> vagas </p>
+                        <p><?php echo $grupo['qtdvagas'] - $grupo['count']; ?> vagas totais</p>
                         <p><?php echo $grupo['horainicio']; ?> - <?php echo $grupo['horatermino']; ?></p>
                         <p><?php echo $grupo['datahorario']; ?></p>
                     </a>

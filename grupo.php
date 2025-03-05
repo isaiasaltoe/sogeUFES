@@ -28,11 +28,11 @@
       
     
      
-    
+    /*
     if (!$grupo) {
         die("Grupo não encontrado.");
     }
-    
+    */
 
      $criador = $_SESSION['codMatricula'] == $grupo['aluno_idcriadorgrupo'];
      
