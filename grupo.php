@@ -235,7 +235,8 @@
     </form>
 
     <?php
-    if(!$japarticipa): 
+    if(!$japarticipa){
+          
         if(isset($_GET['insert'])){
             // Verifique se o parâmetro 'insert' está presente na URL
             $idgrupoestudo = $_GET['id'];
@@ -258,14 +259,50 @@
             header("Location:index.php ?id=$idgrupoestudo");
             exit;
         }
+
+            echo"<a href='?id=". $_GET['id']."&insert=1'>
+            <button type='button' class='botao'>Entrar no Grupo</button>
+            </a>";
+            
+
+    } 
+        
+
+      else {
+        if(isset($_GET['sair'])){
+            $idgrupoestudo = $_GET['id'];
+            $codMatricula = $_SESSION['codMatricula'];  
+
+       
+            $sql = "DELETE FROM participacao WHERE codMatricula = :codMatricula AND idGrupoEstudo = :idGrupoEstudo ";
+
+            $stmtParticipacao = $pdo->prepare($sql);
+            $stmtParticipacao->execute([
+                ':codMatricula' => $codMatricula,
+                ':idGrupoEstudo' => $idgrupoestudo
+            ]);
+
+            
+            header("Location:index.php ?id=$idgrupoestudo");
+            exit;
+            
+        }
+       if(!$criador){
+        echo"<a href='?id=". $_GET['id']."&sair=1'>
+        <button type='button' class='botao'>Sair do Grupo</button>
+        </a>";
+
+       }
+      }
+
 ?>
 
 
-      <a href="?id=<?php echo $_GET['id']; ?>&insert=1">
-      <button type="button" class="botao">Entrar no Grupo</button>
-      </a>
 
-<?php endif; ?>
+
+      
+
+
 
         
     </div>

@@ -77,7 +77,7 @@
                     $grupos = $query->fetchAll(PDO::FETCH_ASSOC);
 
                     if(!$grupos){
-                        echo "<div class = 'mensagem'>Não há grupos com vagas disponíveis! </div>";
+                        echo "<div class = 'mensagem'>Você não está inscrito em nenhum grupo! </div>";
                     }
 
                     foreach ($grupos as $grupo):    
