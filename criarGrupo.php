@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sogeUFES</title>
+    <title>sogeUFES - Criar grupo</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +35,7 @@
 
         <div class ="nome">
             <h5> <?php echo $_SESSION['nomeAluno']?></h5>
-            <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
+            <a href="https://localhost/sogeufes/meusGrupos.php"><img src="photos\account_circle.png" alt="icone2"></a>
             <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>
         </div>
     </header>

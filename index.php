@@ -36,13 +36,14 @@
                         encerrarSessao();
                     }
                     echo '<h5> '. $_SESSION['nomeAluno'].'</h5>
-                        <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
+                        <a href="https://localhost/sogeufes/meusGrupos.php"><img src="photos\account_circle.png" alt="icone2"></a>
                         <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>';
 
 
 
                 } 
                   else{
+          
                     echo'<a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>';
                   }
             ?>
