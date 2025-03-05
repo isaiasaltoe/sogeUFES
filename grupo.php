@@ -28,11 +28,11 @@
       
     
      
-    
+    /*
     if (!$grupo) {
         die("Grupo não encontrado.");
     }
-    
+    */
 
      $criador = $_SESSION['codMatricula'] == $grupo['aluno_idcriadorgrupo'];
      
@@ -55,7 +55,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Exibir Grupo - sogeUFES</title>
+        <title> sogeUFES - Exibir grupos</title>
         
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,7 +85,7 @@
 
         <div class ="nome">
             <h5> <?php echo $_SESSION['nomeAluno']?></h5>
-            <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
+            <a href="https://localhost/sogeufes/meusGrupos.php"><img src="photos\account_circle.png" alt="icone2"></a>
             <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>
         </div>
 
@@ -235,7 +235,8 @@
     </form>
 
     <?php
-    if(!$japarticipa): 
+    if(!$japarticipa){
+          
         if(isset($_GET['insert'])){
             // Verifique se o parâmetro 'insert' está presente na URL
             $idgrupoestudo = $_GET['id'];
@@ -258,14 +259,50 @@
             header("Location:index.php ?id=$idgrupoestudo");
             exit;
         }
+
+            echo"<a href='?id=". $_GET['id']."&insert=1'>
+            <button type='button' class='botao'>Entrar no Grupo</button>
+            </a>";
+            
+
+    } 
+        
+
+      else {
+        if(isset($_GET['sair'])){
+            $idgrupoestudo = $_GET['id'];
+            $codMatricula = $_SESSION['codMatricula'];  
+
+       
+            $sql = "DELETE FROM participacao WHERE codMatricula = :codMatricula AND idGrupoEstudo = :idGrupoEstudo ";
+
+            $stmtParticipacao = $pdo->prepare($sql);
+            $stmtParticipacao->execute([
+                ':codMatricula' => $codMatricula,
+                ':idGrupoEstudo' => $idgrupoestudo
+            ]);
+
+            
+            header("Location:index.php ?id=$idgrupoestudo");
+            exit;
+            
+        }
+       if(!$criador){
+        echo"<a href='?id=". $_GET['id']."&sair=1'>
+        <button type='button' class='botao'>Sair do Grupo</button>
+        </a>";
+
+       }
+      }
+
 ?>
 
 
-      <a href="?id=<?php echo $_GET['id']; ?>&insert=1">
-      <button type="button" class="botao">Entrar no Grupo</button>
-      </a>
 
-<?php endif; ?>
+
+      
+
+
 
         
     </div>

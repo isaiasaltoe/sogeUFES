@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sogeUFES</title>
+    <title> sogeUFES - Grupos</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,11 +23,10 @@
             <h3>Sistema de Organização <br>de Grupo de Estudos da UFES</h3>
         </div>
 
-        
         <?php 
-             require_once 'Sessao.php';
-             verificarSessao();
-          
+            require_once 'Sessao.php';
+            verificarSessao();
+
             if(isset($_GET['logout'])){
                 encerrarSessao();
             }
@@ -35,9 +34,8 @@
 
         <div class ="nome">
             <h5> <?php echo $_SESSION['nomeAluno']?></h5>
-            <a href="https://localhost/sogeufes/login.html"><img src="photos\account_circle.png" alt="icone2"></a>
+            <a href="https://localhost/sogeufes/meusGrupos.php"><img src="photos\account_circle.png" alt="icone2"></a>
             <a href="?logout=1"><img src="photos\logout.png" alt="logout"></a>
-
         </div>
     </header>
 
@@ -46,51 +44,40 @@
             <h2>Grupos com vagas disponíveis</h2>
             <p>Escolha um grupo de estudo</p>
             <div class="salas">  
-            <?php 
-                
+                <?php 
+                    require_once 'conectaBD.php';
 
-                
-
-                require_once 'conectaBD.php';
-
-               
-                $sql =  "SELECT TO_CHAR(ho.dataHorario, 'DD/MM/YYYY') AS dataHorario, ge.idgrupoestudo, di.nomedisciplina,ho.horaInicio,lu.salaLugar,lu.predioLugar,ge.qtdvagas, (ho.horaInicio + INTERVAL '2 HOURS') AS horaTermino FROM grupoEstudo AS ge 
-		                JOIN agenda AS ag ON ag.idGrupoEstudo = ge.idGrupoEstudo
+                    $sql =  "SELECT TO_CHAR(ho.dataHorario, 'DD/MM/YYYY') AS dataHorario, ge.idgrupoestudo,  di.nomedisciplina, ho.horaInicio,lu.salaLugar,lu.predioLugar,ge.qtdvagas, 
+                            (ho.horaInicio + INTERVAL '2 HOURS') AS horaTermino, 
+                            COUNT(pa.codmatricula) AS count
+                        FROM grupoEstudo AS ge 
+                        JOIN agenda AS ag ON ag.idGrupoEstudo = ge.idGrupoEstudo
                         JOIN horario AS ho ON ho.idHorario = ag.idHorario
                         JOIN lugar AS lu ON lu.idLugar = ag.idLugar
-	                    JOIN disciplina AS di ON  di.iddisciplina = ge.iddisciplina
-	                 WHERE qtdvagas >= (
-                         SELECT COUNT(pa.codmatricula)
-		  	                FROM participacao AS pa JOIN grupoEstudo AS ge  ON ge.idGrupoEstudo = pa.idGrupoEstudo
-			                  WHERE situacao = 'confirmado')";
-                 
-                 $query = $pdo->prepare($sql); 
-                 $query->execute();
-                  $grupos = $query->fetchAll(PDO::FETCH_ASSOC);
-                  
-                  if(!$grupos){
-                    echo "<div class = 'mensagem'>Não há grupos com vagas disponíveis! </div>";
-                  }
-                  foreach ($grupos as $grupo):
-                   
-                   
+                        JOIN disciplina AS di ON di.iddisciplina = ge.iddisciplina
+                        LEFT JOIN participacao AS pa ON pa.idGrupoEstudo = ge.idGrupoEstudo AND pa.situacao = 'ativo' 
+                        GROUP BY ge.idgrupoestudo, di.nomedisciplina, ho.horaInicio, lu.salaLugar, lu.predioLugar, ge.qtdvagas, ho.dataHorario";
 
+                    $query = $pdo->prepare($sql); 
+                    $query->execute();
+                    $grupos = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                    echo '<a href = "grupo.php?id='.$grupo['idgrupoestudo'].'" class="sala" id ='.$grupo['idgrupoestudo'].'>
+                    if(!$grupos){
+                        echo "<div class = 'mensagem'>Não há grupos com vagas disponíveis! </div>";
+                    }
 
-                            <h3>' . $grupo['nomedisciplina'] . '</h3>
-                            <p>' . $grupo['salalugar'] . ', ' . $grupo['prediolugar'] . '</p>
-                            <p>' . $grupo['qtdvagas'] . ' vagas totais</p>
-                            <p>' . $grupo['horainicio'] . ' - ' . $grupo['horatermino'] . '</p>
-                            <p>'.$grupo['datahorario'].'</p>
+                    foreach ($grupos as $grupo):
+                ?>
 
-                    </a>';
+                    <a href="grupo.php?id=<?php echo $grupo['idgrupoestudo']; ?>" class="sala" id="<?php echo $grupo['idgrupoestudo']; ?>">
+                        <h3><?php echo $grupo['nomedisciplina']; ?></h3>
+                        <p><?php echo $grupo['salalugar']; ?>, <?php echo $grupo['prediolugar']; ?></p>
+                        <p><?php echo $grupo['qtdvagas'] - $grupo['count']; ?> vagas </p>
+                        <p><?php echo $grupo['horainicio']; ?> - <?php echo $grupo['horatermino']; ?></p>
+                        <p><?php echo $grupo['datahorario']; ?></p>
+                    </a>
 
-                 
-               endforeach
-
-            ?> 
-      
+                <?php endforeach; ?>
             </div>
         </div>
     </div>    
