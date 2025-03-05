@@ -49,38 +49,54 @@
                   $codmatricula = (int)$_SESSION['codMatricula'];
                     require_once 'conectaBD.php';
                       //var_dump($_SESSION['codMatricula']);
-                    $sql =  "SELECT TO_CHAR(ho.dataHorario, 'DD/MM/YYYY') AS dataHorario, ge.idgrupoestudo,  di.nomedisciplina, ho.horaInicio,lu.salaLugar,lu.predioLugar,ge.qtdvagas, 
-                            (ho.horaInicio + INTERVAL '2 HOURS') AS horaTermino, 
-                            COUNT(pa.codmatricula) AS count
-                        FROM grupoEstudo AS ge 
-                        JOIN agenda AS ag ON ag.idGrupoEstudo = ge.idGrupoEstudo
-                        JOIN horario AS ho ON ho.idHorario = ag.idHorario
-                        JOIN lugar AS lu ON lu.idLugar = ag.idLugar
-                        JOIN disciplina AS di ON di.iddisciplina = ge.iddisciplina
-                        LEFT JOIN participacao AS pa ON pa.idGrupoEstudo = ge.idGrupoEstudo AND pa.situacao = 'ativo' 
-                        WHERE pa.codMatricula = :codMatricula 
-                        GROUP BY ge.idgrupoestudo, di.nomedisciplina, ho.horaInicio, lu.salaLugar, lu.predioLugar, ge.qtdvagas, ho.dataHorario";
+                    $sql =  "SELECT al.codmatricula,  
+                                    ge.idgrupoestudo,  
+                                    di.nomedisciplina, 
+                                    TO_CHAR(ho.dataHorario, 'DD/MM/YYYY') AS dataHorario, 
+                                    ho.horaInicio,
+                                    lu.salaLugar,
+                                    lu.predioLugar,
+                                    ge.qtdvagas, 
+                                    (ho.horaInicio + INTERVAL '2 HOURS') AS horaTermino, 
+                                    COUNT(pa.codmatricula) AS count
+                                FROM grupoEstudo AS ge 
+                                JOIN agenda AS ag ON ag.idGrupoEstudo = ge.idGrupoEstudo
+                                JOIN horario AS ho ON ho.idHorario = ag.idHorario
+                                JOIN lugar AS lu ON lu.idLugar = ag.idLugar
+                                JOIN disciplina AS di ON di.iddisciplina = ge.iddisciplina
+                                JOIN participacao AS pa ON pa.idGrupoEstudo = ge.idGrupoEstudo AND pa.situacao = 'ativo'
+                                JOIN aluno AS al ON pa.codmatricula = al.codmatricula
+                                WHERE al.codmatricula = :codMatricula
+                                GROUP BY al.codmatricula, ge.idgrupoestudo, di.nomedisciplina, ho.horaInicio, ho.dataHorario, lu.salaLugar, lu.predioLugar, ge.qtdvagas;
+                                ";
 
                     $query = $pdo->prepare($sql);  
-                    $query->execute([
-                        ':codMatricula'=> $codmatricula
-                    ]);
+                    $query->execute(
+                        ['codMatricula' => $_SESSION['codMatricula'] ]
+                    );
                     $grupos = $query->fetchAll(PDO::FETCH_ASSOC);
 
                     if(!$grupos){
                         echo "<div class = 'mensagem'>Não há grupos com vagas disponíveis! </div>";
                     }
 
-                    foreach ($grupos as $grupo):
+                    foreach ($grupos as $grupo):    
+                   
                 ?>
 
-                    <a href="grupo.php?id=<?php echo $grupo['idgrupoestudo']; ?>" class="sala" id="<?php echo $grupo['idgrupoestudo']; ?>">
+                    <a href="grupo.php?id=<?php echo $grupo['idgrupoestudo']; ?>" class="sala" id="<?php 
+                    var_dump($grupo['codmatricula']);
+                    if($grupo['codmatricula']== $codmatricula):
+                        
+                        echo $grupo['idgrupoestudo']; ?>">
                         <h3><?php echo $grupo['nomedisciplina']; ?></h3>
                         <p><?php echo $grupo['salalugar']; ?>, <?php echo $grupo['prediolugar']; ?></p>
-                        <p><?php echo $grupo['qtdvagas'] - $grupo['count']; ?> vagas totais</p>
                         <p><?php echo $grupo['horainicio']; ?> - <?php echo $grupo['horatermino']; ?></p>
                         <p><?php echo $grupo['datahorario']; ?></p>
                     </a>
+                    <?php endif?>
+                    
+                   
 
                 <?php endforeach; ?>
             </div>
