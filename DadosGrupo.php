@@ -37,9 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmtDisciplina = $pdo->prepare("INSERT INTO disciplina (nomeDisciplina) VALUES (:nome) RETURNING idDisciplina");
             $stmtDisciplina->execute([':nome' => $disciplinaNome]);
             $idDisciplina = $stmtDisciplina->fetchColumn();
-            var_dump($idDisciplina);
+            //var_dump($idDisciplina);
         }
-
+      
+        
        
         $sqlGrupo = "INSERT INTO grupoEstudo (idDisciplina, descricao, qtdVagas, aluno_idCriadorGrupo)
                      VALUES (:disciplina, :descricao, 5, :codMatricula) RETURNING idGrupoEstudo";
@@ -100,22 +101,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ]);
     $grupoExistente = $stmtVerificaGrupo->fetchColumn();
 
+    $horarioData = date('Y-m-d', strtotime($_POST['dia']));
     $dataAtual = date('Y-m-d');
+    
     if ($horarioData < $dataAtual) {
-        echo "Erro: Erro ao escolher dia ";
+        echo "Erro: Data escolhida já passou.";
         $pdo->rollBack();
-        header("Location: criarGrupo.php?msgErro=falha");
-        exit();
-    }   
-
-    $horaAtual = date("H:i");
-    if ($horarioHora < $horaAtual){
-        echo "Erro: Erro ao escolher hora";
-        $pdo->rollBack();
-        header("Location: criarGrupo.php?msgErro=falha");
+        header("Location: criarGrupo.php?msgErro=data");
         exit();
     }
+    
 
+    $dataHoraGrupo = new DateTime($horarioData . ' ' . $horarioHora);
+    $dataHoraAtual = new DateTime();
+    
+    if ($dataHoraGrupo < $dataHoraAtual) {
+        echo "Erro: Data e hora escolhidas já passaram.";
+        $pdo->rollBack();
+        header("Location: criarGrupo.php?msgErro=hora");
+        exit();
+    }
+    
 
 
     if ($grupoExistente) {
