@@ -98,15 +98,19 @@
         <div class="container_esquerda">  
             <label>Aluno: </label>
             <input type="text" value="<?php echo $grupo['criador']; ?>"disabled> 
+            <label>Horário: </label>
             <input type="time" name ="horario"value="<?php echo $grupo['horainicio']; ?>"<?php if(!isset($_GET['edit'])){echo'disabled';}?>>
+            <label >Dia: </label>
             <input type="date" name = "dia" value="<?php echo $grupo['datahorario']; ?>"<?php if(!isset($_GET['edit'])){echo'disabled';}?>>
+            <label >Local: </label>
             <input type="text" name ="lugar" value="<?php echo $grupo['prediolugar'] . ', ' . $grupo['salalugar']; ?>" <?php if(!isset($_GET['edit'])){echo'disabled';}?>>
 
         </div>
         <div class="container_direita">
+        <label >Descrição: </label>
         <textarea <?php if(!isset($_GET['edit'])){echo'disabled';}?> style="height: 29.1vh;"><?php echo htmlspecialchars($grupo['descricao']); ?></textarea>
 
-
+        <label >Vagas disponíveis: </label>    
         <input type="text" value="<?php echo $grupo['qtdvagas' ] - $grupo['count']; ?>" disabled>
         </div>
     </div>

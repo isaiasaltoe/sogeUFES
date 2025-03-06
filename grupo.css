@@ -98,4 +98,12 @@ h1{
     color: black;
     display: flex;
     margin-left: 4.131799163179917vw;
+    font-size: 2vh;
+}
+
+.container_direita label{
+    color: black;
+    display: flex;
+
+    font-size: 2vh;
 }
